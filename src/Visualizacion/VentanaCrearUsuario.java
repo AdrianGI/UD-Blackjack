@@ -71,12 +71,7 @@ public class VentanaCrearUsuario extends JFrame {
 		passwordField = new JPasswordField();
 		panel_Mid.add(passwordField, "cell 2 3,growx");
 
-		JLabel lbl_Email = new JLabel("Email");
-		panel_Mid.add(lbl_Email, "cell 1 5,alignx trailing");
-
-		textField_email = new JTextField();
-		panel_Mid.add(textField_email, "cell 2 5,growx");
-		textField_email.setColumns(10);
+		
 
 		JPanel panel_TOP = new JPanel();
 		panel_TOP.setBackground(new Color(255, 255, 255));
@@ -114,8 +109,7 @@ public class VentanaCrearUsuario extends JFrame {
 				
 				String usuario = textField_usuario.getText();
 				String password = String.valueOf(passwordField.getPassword());
-				String email = textField_email.getText();
-				user = new Usuario(usuario, password, email);
+				user = new Usuario(usuario, password, 0);
 				GestionFicheros.registrarUsuario(user);
 				JOptionPane.showMessageDialog(null, "Inicie Sesion","Registrado Correctamente",JOptionPane.INFORMATION_MESSAGE);
 				VentanaCrearUsuario.this.setVisible(false);

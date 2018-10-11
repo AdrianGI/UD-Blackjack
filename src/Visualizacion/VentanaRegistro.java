@@ -72,26 +72,7 @@ public class VentanaRegistro extends JFrame {
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_Mid.add(passwordField, "cell 1 1,growx,aligny center");
 
-		JButton btnHasOlvidadoLa = new JButton("\u00BFHas olviado la contrase\u00F1a?");
-		btnHasOlvidadoLa.setBackground(new Color(6, 50, 113));
-		btnHasOlvidadoLa.setForeground(Color.BLACK);
-		btnHasOlvidadoLa.addActionListener(new ActionListener() {
-
-			/*
-			 * LLama al metodo de base de datos que comprueba si existe el mail y devuelve
-			 * la contraseña
-			 * 
-			 * Luego llama al metodo enviarCorreo
-			 */
-
-			public void actionPerformed(ActionEvent arg0) {
-				String mail = JOptionPane.showInputDialog("Escribe tu mail");
-				//String pass = BD.olvidarContra(mail);
-
-				//enviarCorreo(pass, mail);
-			}
-		});
-		panel_Mid.add(btnHasOlvidadoLa, "cell 1 3,alignx center,aligny center");
+		
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
@@ -135,7 +116,7 @@ public class VentanaRegistro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String usuario = textField.getText();
 				String contraseña = String.valueOf(passwordField.getPassword());
-				Usuario user = new Usuario(usuario, contraseña, "");
+				Usuario user = new Usuario(usuario, contraseña, 0);
 				int resul = GestionFicheros.existeUsuario(user);
 				
 				if(resul==2)
@@ -162,49 +143,6 @@ public class VentanaRegistro extends JFrame {
 	
 		
 
-	/*
-	 *Metodo que enviar un correo con la contraseña olvidada 
-	 */
-	
-	/*private void enviarCorreo(String pass, String mail) {
-
-		try {
-			String host = "smtp.gmail.com";
-			String user = "ligafantasyflex@gmail.com";
-			String contrasenya1 = "candyflex";
-			String para = mail;
-			String from = user;
-			String subject = "Recuperacion de contraseña";
-			String messageText = "Su contraseña es: " + "\n" + "	" + pass + "\n" + "\n" + "\n"
-					+ "El Equipo de LigaFantasyFlex";
-			boolean sessionDebug = false;
-
-			Properties props = System.getProperties();
-
-			props.put("mail.smtp.starttls.enable", "true");
-			props.put("mail.smtp.host", host);
-			props.put("mail.smtp.port", "587");
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.starttls.required", "true");
-			Session mailSession = Session.getDefaultInstance(props, null);
-			mailSession.setDebug(sessionDebug);
-			Message msg = new MimeMessage(mailSession);
-			msg.setFrom(new InternetAddress(from));
-			InternetAddress[] address = { new InternetAddress(para) };
-			msg.setRecipients(Message.RecipientType.TO, address);
-			msg.setSubject(subject);
-			msg.setSentDate(new Date());
-			msg.setText(messageText);
-			Transport transport = mailSession.getTransport("smtp");
-			transport.connect(host, user, contrasenya1);
-			transport.sendMessage(msg, msg.getAllRecipients());
-			transport.close();
-
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(ventanaRegistro.this, "Error");
-		}
-
-	}*/
 
 }}
 

@@ -64,7 +64,7 @@ public class GestionFicheros {
 					pw = new PrintWriter(f);
 				else
 					pw = new PrintWriter(new FileWriter(f,true));
-				pw.println(u.getNombre()+" "+u.getContraseña()+ " "+ u.getEmail());
+				pw.println(u.getNombre()+" "+u.getContraseña()+ " "+ u.getDinero());
 				pw.flush();
 				pw.close();
 				registrado = true;

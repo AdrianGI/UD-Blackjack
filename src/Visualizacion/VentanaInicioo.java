@@ -22,12 +22,7 @@ public class VentanaInicioo extends JFrame {
 	private JPanel contentPane;
 	
 	public VentanaInicioo() {
-		/*try {
-		BD.getConnection();
-	} catch (SQLException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	}*/
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(150, 150, 457, 229);

@@ -4,7 +4,7 @@ public class Usuario {
 
 	private String nombre;
 	private String contraseña;
-	private String email;
+	
 	private long dinero;
 	private String numCuenta;
 	
@@ -13,10 +13,11 @@ public class Usuario {
 
 	}
 	
-	public Usuario(String nombre, String contraseña, String email) {
+	public Usuario(String nombre, String contraseña,long dinero) {
 		this.setNombre(nombre);
 		this.setContraseña(contraseña);
-		this.email = email;
+		this.setDinero(dinero);
+		
 		
 	}
 	
@@ -63,18 +64,8 @@ public class Usuario {
 		
 	}
 	
-	public String getEmail() {
-		return email;
-	}
 	
-	public void setEmail(String email) {
-		boolean tieneArroba = false;
-		for (int i = 0; i < email.length() && !tieneArroba; i++) {
-			if (email.charAt(i) == '@') {
-				tieneArroba = true;
-				this.email = email;
-			}
-		}
+		
 
 	}
-}
+

@@ -110,8 +110,14 @@ public class VentanaCrearUsuario extends JFrame {
 				String usuario = textField_usuario.getText();
 				String password = String.valueOf(passwordField.getPassword());
 				user = new Usuario(usuario, password, 0);
-				GestionFicheros.registrarUsuario(user);
-				JOptionPane.showMessageDialog(null, "Inicie Sesion","Registrado Correctamente",JOptionPane.INFORMATION_MESSAGE);
+				//GestionFicheros.registrarUsuario(user);
+				boolean registrado = VentanaInicioo.bd.registrarUsuario(user);
+				if(registrado)
+					JOptionPane.showMessageDialog(null, "Usuario registrado con �xito", "REGISTRO OK", JOptionPane.INFORMATION_MESSAGE);
+				else
+					JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe", "REGISTRO FALLIDO", JOptionPane.ERROR_MESSAGE);
+				
+				
 				VentanaCrearUsuario.this.setVisible(false);
 				VentanaInicioo vi = new VentanaInicioo();
 				vi.setVisible(true);

@@ -74,6 +74,7 @@ public class VentanaRegistro extends JFrame {
 
 		
 
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, BorderLayout.NORTH);
@@ -117,19 +118,23 @@ public class VentanaRegistro extends JFrame {
 				String usuario = textField.getText();
 				String contraseña = String.valueOf(passwordField.getPassword());
 				Usuario user = new Usuario(usuario, contraseña, 0);
-				int resul = GestionFicheros.existeUsuario(user);
+				int resul = VentanaInicioo.bd.existeUsuario(user);
 				
-				if(resul==2)
+				if(resul==2){
 					JOptionPane.showMessageDialog(null, "BIENVENIDO","Acceso autorizado",JOptionPane.INFORMATION_MESSAGE);
+					VentanaMenu a = new VentanaMenu(user);
+					a.setVisible(true);
+					VentanaRegistro.this.setVisible(false);
+					
+				}
 				else if(resul==1)
-					JOptionPane.showMessageDialog(null, "CONTRASENA INCORRECTA","Acceso no autorizado",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "CONTRASE�A INCORRECTA","Acceso no autorizado",JOptionPane.ERROR_MESSAGE);
 				else{
-					int resp = JOptionPane.showConfirmDialog(null, "NO SE HA ENCONTRADO EL USUARIO","USUARIO NO REGISTRADO",JOptionPane.ERROR_MESSAGE);
+					int resp = JOptionPane.showConfirmDialog(null, "�Quieres registrarte?","USUARIO NO REGISTRADO",JOptionPane.ERROR_MESSAGE);
 					if(resp == 0){
 						
-						
-						
-						
+						VentanaCrearUsuario vr = new VentanaCrearUsuario(ventanaanterior);
+						vr.setVisible(true);
 					}
 				}
 				

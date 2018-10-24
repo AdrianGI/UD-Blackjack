@@ -4,8 +4,7 @@ public class Usuario {
 
 	private String nombre;
 	private String contraseña;
-	
-	private long dinero;
+	private float dinero;
 	private String numCuenta;
 	
 	
@@ -42,12 +41,12 @@ public class Usuario {
 	
 	
 
-	public long getDinero() {
+	public float getDinero() {
 		return dinero;
 	}
 
-	public void setDinero(long dinero) {
-		this.dinero = dinero;
+	public void setDinero(float total) {
+		this.dinero = total;
 	}
 
 	public String getNumCuenta() {

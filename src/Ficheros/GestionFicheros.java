@@ -11,6 +11,57 @@ import java.io.PrintWriter;
 import Datos.Usuario;
 
 public class GestionFicheros {
+
+
+public static void Ingresar( String nombre,String numCuenta,float dinero) {
+	
+	try {
+	PrintWriter pw = null;
+	File f = new File("Registro.txt");
+	if(!f.exists())
+		pw = new PrintWriter(f);
+	else
+		pw = new PrintWriter(new FileWriter(f,true));
+	pw.println(nombre+ " Ha Ingresado"+ dinero+"€ al numero de cuenta "+ numCuenta ); // preguntar fecha 
+	pw.close();
+	
+
+	} catch (FileNotFoundException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+	} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+	}
+	
+	}
+
+
+public static void Retirar( String nombre,String numCuenta,float dinero) {
+	
+	try {
+	PrintWriter pw = null;
+	File f = new File("Registro.txt");
+	if(!f.exists())
+		pw = new PrintWriter(f);
+	else
+		pw = new PrintWriter(new FileWriter(f,true));
+	pw.println(nombre+ " Ha Retirado"+ dinero+"€ al numero de cuenta "+ numCuenta ); // preguntar fecha y como saber si retira o ingresa
+	pw.flush();
+	pw.close();
+	
+
+	} catch (FileNotFoundException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+	} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+	}
+	
+	}
+
+
 	/*Cuando no se van a crear objetos de una clase, todos sus m�todos tienen que ser
 	 * public y static*/
 	/**
@@ -22,7 +73,10 @@ public class GestionFicheros {
 	 * 			 1 - Si el nombre es correcto pero la contrase�a no
 	 * 			 2 - Si el nombre y la contrase�a son correctos
 	 */
-	public static int existeUsuario(Usuario u){
+
+
+
+/*	public static int existeUsuario(Usuario u){
 		int resul = 0;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Registro.txt"));
@@ -79,9 +133,9 @@ public class GestionFicheros {
 		return registrado;
 	}
 }
+	*/
 	
-	
-	
+}
 	
 	
 	

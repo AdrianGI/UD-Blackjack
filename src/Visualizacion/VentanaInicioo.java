@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import BD.BD;
 //import aplicacionusuario.datos.BD;
 import net.miginfocom.swing.MigLayout;
 
@@ -20,9 +22,11 @@ public class VentanaInicioo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	public static BD bd;
 	
 	public VentanaInicioo() {
 		
+		bd = new BD();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(150, 150, 457, 229);

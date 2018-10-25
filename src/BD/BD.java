@@ -134,12 +134,12 @@ public class BD {
 	
 	public static void ingresararsaldo( String nombre, float dinero) {
 		
-		String query = "SELECT dinero FROM usuario WHERE nombre= "+ nombre;
 		
 		try {
-			 stmt.executeQuery(query);
-			query= "UPDATE usuario SET dinero= dinero+"+dinero+"' WHERE nombre= " + nombre;
+			String query= "UPDATE usuario SET dinero= dinero+"+dinero+" WHERE nombre= '" + nombre+"'";
 
+			stmt.executeUpdate(query);
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,7 +147,42 @@ public class BD {
 		
 	}
 	
+
+
+
+public static void retirararsaldo( String nombre, float dinero) {
+	
+	
+	try {
+		String query= "UPDATE usuario SET dinero= dinero - "+dinero+" WHERE nombre= '" + nombre+"'";
+
+		 stmt.executeUpdate(query);
+	
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
 }
+
+public static float obtenerSaldo(String nombre){
+	String query = "SELECT dinero FROM usuario WHERE nombre ='"+nombre+"'";
+	ResultSet rs;
+	float saldo = 0;
+	try {
+		rs = stmt.executeQuery(query);
+		saldo = rs.getFloat(1);
+		rs.close();
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return saldo;
+}
+
+}
+
 	
 	
 	

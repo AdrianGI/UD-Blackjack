@@ -84,7 +84,7 @@ public class VentanaIngresar extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//BD.ingresararsaldo(user.getNombre(), parseFloat(textFielddin.getText())); // PREGUNTAR
+				BD.ingresararsaldo(user.getNombre(), Float.parseFloat(textFielddin.getText())); 
 				
 				ventanaanterior.setVisible(true);
 				VentanaIngresar.this.setVisible(false);

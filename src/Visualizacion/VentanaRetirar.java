@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import BD.BD;
 import Datos.Usuario;
 
 public class VentanaRetirar extends JFrame {
@@ -82,6 +83,7 @@ public class VentanaRetirar extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				BD.retirararsaldo(user.getNombre(), Float.parseFloat(textFielddin.getText())); 
 				
 				
 				ventanaanterior.setVisible(true);

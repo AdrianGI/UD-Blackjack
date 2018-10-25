@@ -61,7 +61,9 @@ public class VentanaMenu extends JFrame {
 		lbljug.setBounds(91, 6, 106, 16);
 		panelNorte.add(lbljug);
 		
-		JLabel lbldin =  new JLabel(user.getDinero()+ "€");         // SELECT DONDE SE GUARDA
+		float saldo = BD.obtenerSaldo(user.getNombre());
+		user.setDinero(saldo);
+		JLabel lbldin =  new JLabel(user.getDinero()+ "€");        
 		lbldin.setFont(new Font("American Typewriter", Font.PLAIN, 14));
 		lbldin.setBounds(318, 6, 99, 16);
 		panelNorte.add(lbldin);

@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import Datos.Usuario;
 
@@ -16,6 +18,11 @@ public class GestionFicheros {
 public static void Ingresar( String nombre,String numCuenta,float dinero) {
 	
 	try {
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(new Date(System.currentTimeMillis()));
+		int dia = gc.get(GregorianCalendar.DAY_OF_MONTH);
+		int mes = gc.get(GregorianCalendar.MONTH);
+		int anio = gc.get(gc.YEAR);
 	PrintWriter pw = null;
 	File f = new File("Registro.txt");
 	if(!f.exists())

@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Logger;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
 
 import Datos.Usuario;
 
@@ -23,13 +27,18 @@ public static void Ingresar( String nombre,String numCuenta,float dinero) {
 		int dia = gc.get(GregorianCalendar.DAY_OF_MONTH);
 		int mes = gc.get(GregorianCalendar.MONTH);
 		int anio = gc.get(gc.YEAR);
+		int horas=gc.get(GregorianCalendar.HOUR_OF_DAY);
+		int minutos=gc.get(GregorianCalendar.MINUTE);
+		int segundos=gc.get(GregorianCalendar.SECOND
+				);
 	PrintWriter pw = null;
-	File f = new File("Registro.txt");
+	File f = new File("Historial.txt");
 	if(!f.exists())
 		pw = new PrintWriter(f);
 	else
 		pw = new PrintWriter(new FileWriter(f,true));
-	pw.println(nombre+ " Ha Ingresado"+ dinero+"€ al numero de cuenta "+ numCuenta ); // preguntar fecha 
+	pw.println(dia+"/"+mes+"/"+anio+"     "+ horas+":"+ minutos+":"+segundos );
+	pw.println(nombre+ " ha ingresado "+ dinero+"€ al numero de cuenta "+ numCuenta ); 
 	pw.close();
 	
 
@@ -44,16 +53,31 @@ public static void Ingresar( String nombre,String numCuenta,float dinero) {
 	}
 
 
+
+
+	
+	
 public static void Retirar( String nombre,String numCuenta,float dinero) {
 	
 	try {
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(new Date(System.currentTimeMillis()));
+		int dia = gc.get(GregorianCalendar.DAY_OF_MONTH);
+		int mes = gc.get(GregorianCalendar.MONTH);
+		int anio = gc.get(gc.YEAR);
+		
+		int horas=gc.get(GregorianCalendar.HOUR_OF_DAY);
+		int minutos=gc.get(GregorianCalendar.MINUTE);
+		int segundos=gc.get(GregorianCalendar.SECOND
+				);
 	PrintWriter pw = null;
-	File f = new File("Registro.txt");
+	File f = new File("Historial.txt");
 	if(!f.exists())
 		pw = new PrintWriter(f);
 	else
 		pw = new PrintWriter(new FileWriter(f,true));
-	pw.println(nombre+ " Ha Retirado"+ dinero+"€ al numero de cuenta "+ numCuenta ); // preguntar fecha y como saber si retira o ingresa
+	pw.println(dia+"/"+mes+"/"+anio+"     "+ horas+":"+ minutos+":"+segundos );
+	pw.println(nombre+ " ha retirado "+ dinero+"€ al numero de cuenta "+ numCuenta ); 
 	pw.flush();
 	pw.close();
 	
@@ -68,6 +92,9 @@ public static void Retirar( String nombre,String numCuenta,float dinero) {
 	
 	}
 
+		
+	
+	
 
 	/*Cuando no se van a crear objetos de una clase, todos sus m�todos tienen que ser
 	 * public y static*/

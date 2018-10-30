@@ -154,7 +154,7 @@ public static void retirararsaldo( String nombre, float dinero) {
 	
 	
 	try {
-		String query= "UPDATE usuario SET dinero= dinero - "+dinero+" WHERE nombre= '" + nombre+"'";
+		String query= "UPDATE usuario SET dinero= dinero-"+dinero+" WHERE nombre= '" + nombre+"'";
 
 		 stmt.executeUpdate(query);
 	

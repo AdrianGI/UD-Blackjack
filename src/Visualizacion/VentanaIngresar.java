@@ -9,8 +9,11 @@ import javax.swing.border.EmptyBorder;
 
 import BD.BD;
 import Datos.Usuario;
+import Ficheros.GestionFicheros;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -25,6 +28,7 @@ public class VentanaIngresar extends JFrame {
 	private JTextField textFielddin;
 	float daingresar;
 	String numCuenta;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -33,6 +37,7 @@ public class VentanaIngresar extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaIngresar(VentanaMenu ventanaanterior,Usuario user) {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -84,10 +89,21 @@ public class VentanaIngresar extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				BD.ingresararsaldo(user.getNombre(), Float.parseFloat(textFielddin.getText())); 
+				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES")) {
 				
-				ventanaanterior.setVisible(true);
+				BD.ingresararsaldo(user.getNombre(), Float.parseFloat(textFielddin.getText())); 
 				VentanaIngresar.this.setVisible(false);
+				ventanaanterior.setVisible(false);
+				VentanaMenu v = new VentanaMenu(user);
+				v.setVisible(true);
+				GestionFicheros.Ingresar(user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
+
+			}else {
+				
+				JOptionPane.showMessageDialog(null,"DATOS NO VALIDOS" , "Acceso no autorizado", JOptionPane.ERROR_MESSAGE);
+				
+				
+			}
 			}
 		});
 		btnIngresar.setFont(new Font("Monospaced", Font.PLAIN, 13));

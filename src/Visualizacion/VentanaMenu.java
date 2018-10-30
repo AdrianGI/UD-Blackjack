@@ -30,7 +30,8 @@ public class VentanaMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaMenu(Usuario user ) {
+	public VentanaMenu(Usuario user) {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -89,6 +90,15 @@ public class VentanaMenu extends JFrame {
 		panel_Centro.setLayout(null);
 		
 		JButton btnJugar = new JButton("Jugar");
+		btnJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				VentanaMenu.this.setVisible(false);
+				VentanaJuego a  = new VentanaJuego(VentanaMenu.this, user);
+				a.setVisible(true);
+				
+			}
+		});
 		btnJugar.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		btnJugar.setBounds(89, 23, 227, 29);
 		panel_Centro.add(btnJugar);
@@ -99,7 +109,7 @@ public class VentanaMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				VentanaIngresar a = new VentanaIngresar(null, user);
+				VentanaIngresar a = new VentanaIngresar(VentanaMenu.this, user);
 				a.setVisible(true);
 			}
 		});
@@ -107,11 +117,25 @@ public class VentanaMenu extends JFrame {
 		panel_Centro.add(btnIngresarDinero);
 		
 		JButton btnHistorial = new JButton("Historial");
+		btnHistorial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaMenu.this.setVisible(false);
+				VentanaHistorial a = new VentanaHistorial(VentanaMenu.this);
+				a.setVisible(true);
+			}
+		});
 		btnHistorial.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		btnHistorial.setBounds(89, 147, 227, 29);
 		panel_Centro.add(btnHistorial);
 		
 		JButton btnRetirarDinero = new JButton("Retirar Dinero");
+		btnRetirarDinero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaRetirar a = new VentanaRetirar(VentanaMenu.this, user);
+				a.setVisible(true);
+				
+			}
+		});
 		btnRetirarDinero.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		btnRetirarDinero.setBounds(89, 106, 227, 29);
 		panel_Centro.add(btnRetirarDinero);
@@ -123,6 +147,14 @@ public class VentanaMenu extends JFrame {
 		panelsur.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Cerrar Sesion");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaInicioo a = new VentanaInicioo();
+				a.setVisible(true);
+				VentanaMenu.this.setVisible(false);
+				
+			}
+		});
 		btnNewButton.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		btnNewButton.setBounds(250, 0, 141, 29);
 		panelsur.add(btnNewButton);

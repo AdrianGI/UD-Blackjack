@@ -21,10 +21,12 @@ import net.miginfocom.swing.MigLayout;
 public class VentanaInicioo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	public static BD bd;
+	private JPanel contentPane;
 	
 	public VentanaInicioo() {
+		setResizable(false);
+		
 		
 		bd = new BD();
 		

@@ -1,0 +1,12 @@
+
+
+27/9/2018     11:55:50
+adrian ha ingresado 30.0€ al numero de cuenta ES1111222233334444
+28/9/2018     19:31:35
+adrian ha ingresado 100.0€ al numero de cuenta ES1111222233334444
+28/9/2018     19:31:38
+adrian ha ingresado 100.0€ al numero de cuenta ES1111222233334444
+28/9/2018     19:32:14
+adrian ha retirado 30.0€ al numero de cuenta ES2222111122221111
+30/9/2018     16:12:29
+adrian ha retirado 20.0€ al numero de cuenta ES0101010101010101

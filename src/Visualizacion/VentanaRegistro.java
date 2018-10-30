@@ -50,6 +50,7 @@ public class VentanaRegistro extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 25));
 		setContentPane(contentPane);
+		
 
 		JPanel panel_Mid = new JPanel();
 		panel_Mid.setBackground(new Color(255, 255, 255));
@@ -128,9 +129,9 @@ public class VentanaRegistro extends JFrame {
 					
 				}
 				else if(resul==1)
-					JOptionPane.showMessageDialog(null, "CONTRASE�A INCORRECTA","Acceso no autorizado",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "CONTRASEÑA INCORRECTA","Acceso no autorizado",JOptionPane.ERROR_MESSAGE);
 				else{
-					int resp = JOptionPane.showConfirmDialog(null, "�Quieres registrarte?","USUARIO NO REGISTRADO",JOptionPane.ERROR_MESSAGE);
+					int resp = JOptionPane.showConfirmDialog(null, "¿Quieres registrarte?","USUARIO NO REGISTRADO",JOptionPane.ERROR_MESSAGE);
 					if(resp == 0){
 						
 						VentanaCrearUsuario vr = new VentanaCrearUsuario(ventanaanterior);

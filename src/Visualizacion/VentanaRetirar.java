@@ -10,12 +10,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import BD.BD;
 import Datos.Usuario;
+import Ficheros.GestionFicheros;
 
 public class VentanaRetirar extends JFrame {
 
@@ -32,6 +34,7 @@ public class VentanaRetirar extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaRetirar(VentanaMenu ventanaanterior,Usuario user) {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -82,12 +85,21 @@ public class VentanaRetirar extends JFrame {
 		JButton btnIngresar = new JButton("Retirar");
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES") ) {
+					
 				
 				BD.retirararsaldo(user.getNombre(), Float.parseFloat(textFielddin.getText())); 
-				
-				
-				ventanaanterior.setVisible(true);
 				VentanaRetirar.this.setVisible(false);
+				ventanaanterior.setVisible(false);
+				VentanaMenu v = new VentanaMenu(user);
+				v.setVisible(true);
+				
+				GestionFicheros.Retirar(user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
+				}else {
+					
+					JOptionPane.showMessageDialog(null,"DATOS NO VALIDOS" , "Acceso no autorizado", JOptionPane.ERROR_MESSAGE);
+					
+				}
 			}
 		});
 		btnIngresar.setFont(new Font("Monospaced", Font.PLAIN, 13));

@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import Datos.Carta;
 import Datos.Usuario;
 
 public class BD {
@@ -165,6 +167,47 @@ public static void retirararsaldo( String nombre, float dinero) {
 	
 }
 
+
+public static int obtenerValorCarta(String ruta) {
+	
+	int valor=0;
+	String query= "SELECT valor FROM cartas WHERE imagen='"+ruta+"'";
+	ResultSet rs;
+	try {
+		rs = stmt.executeQuery(query);
+		valor = rs.getInt(1);
+		rs.close();
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+			
+	return valor;
+	
+	
+	
+}
+
+/*public static Carta repartirCarta(){
+	Carta aCartas= new Carta("","");
+	String query = "SELECT RANDOM carta,palo FROM cartas";
+	try {
+		ResultSet rs = stmt.executeQuery(query);
+			String carta = rs.getString(1);
+			String palo= rs.getString(2);
+			aCartas =new Carta(carta,palo);
+			
+		
+		rs.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return aCartas;
+}
+*/
 public static float obtenerSaldo(String nombre){
 	String query = "SELECT dinero FROM usuario WHERE nombre ='"+nombre+"'";
 	ResultSet rs;
@@ -179,6 +222,23 @@ public static float obtenerSaldo(String nombre){
 		e.printStackTrace();
 	}
 	return saldo;
+}
+
+public static ArrayList<String> obtenerRutasDeLaBaseDeDatos(){
+	ArrayList<String> aRutas = new ArrayList<String>();
+	String query = "SELECT imagen FROM cartas";
+	try {
+		ResultSet rs = stmt.executeQuery(query);
+		while(rs.next()){
+			String ruta = rs.getString(1);
+			aRutas.add(ruta);
+		}
+		rs.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return aRutas;
 }
 
 }

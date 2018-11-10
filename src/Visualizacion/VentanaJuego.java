@@ -27,6 +27,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
 import java.awt.GridLayout;
+import java.awt.Panel;
 import java.util.ArrayList;
 
 import javax.swing.JSeparator;
@@ -35,13 +36,17 @@ import java.awt.event.ActionEvent;
 
 public class VentanaJuego extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel contentPane, cartasJugador[] = new JPanel[5],cartasDealer[]= new JPanel[5];
 	private JTextField Cantidad;
-
+	private int jugador,dealer,numCartasJugadas,conteoJugador,ConteoDealer,numCartasDealer;
 	
 	public VentanaJuego(VentanaMenu ventanaanterior,Usuario user) {
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		numCartasJugadas = 2;
+		conteoJugador = 0;
+		ConteoDealer=0;
+		numCartasDealer=1;
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(200, 200, 800, 700);
 		
 		contentPane = new PanelFondo();
@@ -148,10 +153,15 @@ public class VentanaJuego extends JFrame {
 		
 		JButton btnPedirCarta = new JButton("Pedir Carta");
 		
+		
+		btnPedirCarta.setEnabled(false);
+		
 		btnPedirCarta.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		panelE.add(btnPedirCarta, "cell 0 5,alignx center");
 		
 		JButton btnPlantarse = new JButton("Plantarse");
+		
+		btnPlantarse.setEnabled(false);
 		btnPlantarse.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		panelE.add(btnPlantarse, "cell 0 7,alignx center");
 		
@@ -170,96 +180,247 @@ public class VentanaJuego extends JFrame {
 		panel.setLayout(null);
 		panel.setOpaque(false);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(29, 70, 70, 90);
-		panel.add(panel_1);
 		
+		JPanel carta2D = new JPanel();
+		carta2D.setBounds(111, 70, 70, 90);
+		panel.add(carta2D);
+		carta2D.setOpaque(false);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(111, 70, 70, 90);
-		panel.add(panel_2);
+		JPanel carta3D = new JPanel();
+		carta3D.setBounds(193, 70, 70, 90);
+		panel.add(carta3D);
+		carta3D.setOpaque(false);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(193, 70, 70, 90);
-		panel.add(panel_3);
+		JPanel carta4D = new JPanel();
+		carta4D.setBounds(275, 70, 70, 90);
+		panel.add(carta4D);
+		carta4D.setOpaque(false);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(275, 70, 70, 90);
-		panel.add(panel_4);
+		JPanel carta5D = new JPanel();
+		carta5D.setBounds(357, 70, 70, 90);
+		panel.add(carta5D);
+		carta5D.setOpaque(false);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(357, 70, 70, 90);
-		panel.add(panel_5);
+		JPanel carta1J = new JPanel();
+		carta1J.setBounds(29, 341, 70, 90);
+		panel.add(carta1J);
+		carta1J.setOpaque(false);
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(29, 341, 70, 90);
-		panel.add(panel_6);
+		JPanel Carta2J = new JPanel();
+		Carta2J.setBounds(111, 341, 70, 90);
+		panel.add(Carta2J);
+		Carta2J.setOpaque(false);
 		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBounds(111, 341, 70, 90);
-		panel.add(panel_7);
+		JPanel Carta3J = new JPanel();
+		Carta3J.setBounds(193, 341, 70, 90);
+		panel.add(Carta3J);
+		Carta3J.setOpaque(false);
 		
-		JPanel panel_8 = new JPanel();
-		panel_8.setBounds(193, 341, 70, 90);
-		panel.add(panel_8);
+		JPanel Carta4J = new JPanel();
+		Carta4J.setBounds(275, 341, 70, 90);
+		panel.add(Carta4J);
+		Carta4J.setOpaque(false);
 		
-		JPanel panel_9 = new JPanel();
-		panel_9.setBounds(275, 341, 70, 90);
-		panel.add(panel_9);
+		JPanel Carta5J = new JPanel();
+		Carta5J.setBounds(357, 341, 70, 90);
+		panel.add(Carta5J);
+		Carta5J.setOpaque(false);
 		
-		JPanel panel_10 = new JPanel();
-		panel_10.setBounds(357, 341, 70, 90);
-		panel.add(panel_10);
+		JPanel carta1D = new JPanel();
+		carta1D.setBounds(29, 70, 70, 90);
+		panel.add(carta1D);
+		carta1D.setOpaque(false);
+		
+		cartasJugador[0] = carta1J;
+		cartasJugador[1] = Carta2J;
+		cartasJugador[2] = Carta3J;
+		cartasJugador[3] = Carta4J;
+		cartasJugador[4] = Carta5J;
+		
+		cartasDealer[0]= carta1D;
+		cartasDealer[1]= carta2D;
+		cartasDealer[2]= carta3D;
+		cartasDealer[3]= carta4D;
+		cartasDealer[4]= carta5D;
+		
+			
+		
 		
 		
 		JButton button = new JButton("Jugar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				boolean error = false;
+				btnTerminarPartida.setEnabled(false);
+				
 				if(!Cantidad.getText().isEmpty()) {
-				label_1.setText(Cantidad.getText()+"€");
-				ArrayList<String> aRutas =BD.obtenerRutasDeLaBaseDeDatos();
-				//int i= (int)Math.random()*52+1;
-				int i = 1;
+	
+					try {
+						int cant = Integer.parseInt(Cantidad.getText());
+					}catch(NumberFormatException e1){
+						error = true;
+					}
+					if(error) {
+						JOptionPane.showMessageDialog(null, "El valor insertado no es correcto", "ERROR EN EL FORMATO", JOptionPane.ERROR_MESSAGE);
+					}else {
 				
-				//Panel_1 DEALER
-				String ruta = aRutas.get(i); 
-				ImageIcon im = new ImageIcon(ruta);
-				im.setDescription(ruta);
-				JLabel lblFoto = new JLabel(im);
-				panel_1.add(lblFoto);
-				System.out.println(ruta);//no sale la foto solo la ruta y preguntar espacios
-				//Panel_2
-				String ruta2 = aRutas.get(i); 
-				ImageIcon im2 = new ImageIcon(ruta2);
-				im.setDescription(ruta);
-				JLabel lblFoto2 = new JLabel(im2);
-				panel_1.add(lblFoto2);
-				System.out.println(ruta2);//no sale la foto solo la ruta y preguntar espacios
-				
-				//JUgador panel_6
-				String ruta6 = aRutas.get(i); 
-				ImageIcon im6 = new ImageIcon(ruta6);
-				im.setDescription(ruta);
-				JLabel lblFoto6 = new JLabel(im6);
-				panel_1.add(lblFoto6);
-				System.out.println(ruta6);//no sale la foto solo la ruta y preguntar espacios
-				
-				//panel_7
-				String ruta7 = aRutas.get(i); 
-				ImageIcon im7 = new ImageIcon(ruta7);
-				im.setDescription(ruta7);
-				JLabel lblFoto7 = new JLabel(im7);
-				panel_1.add(lblFoto7);
-				System.out.println(ruta7);//no sale la foto solo la ruta y preguntar espacios
-				
-				label_2.setText(BD.obtenerValorCarta(ruta)+"");
-				
-			}else {
-				JOptionPane.showMessageDialog(null,"DATOS NO VALIDOS" , "Error", JOptionPane.ERROR_MESSAGE);
+						label_1.setText(Cantidad.getText()+"€");
+						Cantidad.setText("");
+						ArrayList<String> aRutas =BD.obtenerRutasDeLaBaseDeDatos();
+						
+						
+						//Panel_1 DEALER
+						String ruta1 = aRutas.get((int) Math.floor(Math.random()*52)); 
+						ImageIcon im = new ImageIcon(ruta1);
+						aRutas.remove(ruta1);
+						im.setDescription(ruta1);
+						JLabel lblFoto = new JLabel(im);
+						carta1D.add(lblFoto);
+						carta1D.setOpaque(false);
+						System.out.println(ruta1);
+						ConteoDealer=BD.obtenerValorCarta(ruta1);
+						
+						
+						
+						
+						
+						//JUgador panel_6
+						String ruta6 = aRutas.get((int) Math.floor(Math.random()*51)); 
+						aRutas.remove(ruta6);
+						ImageIcon im6 = new ImageIcon(ruta6);
+						im.setDescription(ruta6);
+						JLabel lblFoto6 = new JLabel(im6);
+						carta1J.add(lblFoto6);
+						System.out.println(ruta6);
+						conteoJugador += BD.obtenerValorCarta(ruta6);
+						//panel_7
+						String ruta7 = aRutas.get((int) Math.floor(Math.random()*50)); 
+						aRutas.remove(ruta7);
+						ImageIcon im7 = new ImageIcon(ruta7);
+						im7.setDescription(ruta7);
+						JLabel lblFoto7 = new JLabel(im7);
+						Carta2J.add(lblFoto7);
+						conteoJugador += BD.obtenerValorCarta(ruta7);
+						System.out.println(ruta7);
+						
+						label.setText(BD.obtenerValorCarta(ruta1)+"");
+						label_2.setText(SumarCartas(BD.obtenerValorCarta(ruta6),BD.obtenerValorCarta(ruta7) )+"");
+						
+						btnPlantarse.setEnabled(true);
+						btnPedirCarta.setEnabled(true);
+						
+						btnPedirCarta.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								
+								if (conteoJugador <=21) {
+									
+								
+								numCartasJugadas++;
+								String ruta8 = aRutas.get((int) Math.floor(Math.random()*49)); 
+								aRutas.remove(ruta8);
+								ImageIcon im8 = new ImageIcon(ruta8);
+								im8.setDescription(ruta8);
+								JLabel lblFoto8 = new JLabel(im8);
+								cartasJugador[numCartasJugadas-1].add(lblFoto8);
+								System.out.println(ruta8);
+								conteoJugador = SumarCartas(conteoJugador, BD.obtenerValorCarta(ruta8));
+								label_2.setText(conteoJugador+"");
+								if(conteoJugador>21) {
+									JOptionPane.showMessageDialog(null, "Te has Pasado:", "Ganador: Dealer", JOptionPane.INFORMATION_MESSAGE);
+									carta1J.removeAll();
+									Carta2J.removeAll();
+									Carta3J.removeAll();
+									Carta4J.removeAll();
+									Carta5J.removeAll();
+								
+									carta1D.removeAll();
+									carta2D.removeAll();
+									carta3D.removeAll();
+									carta4D.removeAll();
+									carta5D.removeAll();
+								
+									label.setText("");
+									label_2.setText("");
+									label_1.setText("");
+									btnTerminarPartida.setEnabled(true);
+									
+									
+								}
+								if(numCartasJugadas == 5)
+									btnPedirCarta.setEnabled(false);
+								
+							
+								}}});
+						
+						
+						
+						btnPlantarse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								int i=0;
+								btnPedirCarta.setEnabled(false);
+								
+								while (ConteoDealer<17) {
+									
+								
+								String ruta2 = aRutas.get((int) Math.floor(Math.random()*48)); 
+								aRutas.remove(ruta2);
+								ImageIcon im2 = new ImageIcon(ruta2);
+								im2.setDescription(ruta2);
+								JLabel lblFoto2 = new JLabel(im2);
+								cartasDealer[numCartasDealer+i].add(lblFoto2);
+								i++;
+								System.out.println(ruta2);
+								ConteoDealer=SumarCartas(ConteoDealer,BD.obtenerValorCarta(ruta2));
+								
+								
+								
+								
+								
+								
+							}
+								btnPlantarse.setEnabled(false);
+								label.setText(ConteoDealer+"");
+								
+								determinarGanador(conteoJugador,ConteoDealer);
+								
+									carta1J.removeAll();
+									Carta2J.removeAll();
+									Carta3J.removeAll();
+									Carta4J.removeAll();
+									Carta5J.removeAll();
+								
+									carta1D.removeAll();
+									carta2D.removeAll();
+									carta3D.removeAll();
+									carta4D.removeAll();
+									carta5D.removeAll();
+								
+									label.setText("");
+									label_2.setText("");
+									label_1.setText("");
+									btnTerminarPartida.setEnabled(true);
+								
+								
+								
+							
+							}});
+						
+						
+						
+						
+						
+						
+						
+					}
+				}else {
+						JOptionPane.showMessageDialog(null,"DATOS NO VALIDOS" , "Error", JOptionPane.ERROR_MESSAGE);
+				}
+					
+			panel.updateUI();
 			}
-			}
 				
-				
+			
 			
 			
 		});
@@ -269,19 +430,56 @@ public class VentanaJuego extends JFrame {
 		
 
 
-			
-		
-		
-		
-		
-		
-		
-		
-		
-	
-
 	}
 	
+	private int  determinarGanador(int jugador, int dealer) {
+		
+		int resultado=0;
+		
+		if ( dealer==21  ||  dealer<21 && dealer>jugador) {
+			JOptionPane.showMessageDialog(null, "DEALER", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+			
+			resultado=1;
+			
+		}else if(jugador==21 ) {
+				JOptionPane.showMessageDialog(null, "JUGADOR", "BLACKJACK GANADOR", JOptionPane.INFORMATION_MESSAGE);
+				
+				resultado=2;
+			}else if(jugador>21&& jugador>dealer) {
+				JOptionPane.showMessageDialog(null, "JUGADOR", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+				resultado=3;
+				
+			}
+		return resultado;
+		
+		
+	}
+	
+	
+	
+	private int SumarCartas(int a, int b) {
+		
+		int suma;
+		if (a==1 || b==1) {
+			if(a+b+10<=21) {
+				
+				suma=a+b+10;
+				
+			}else{
+				
+				 suma =a+b;
+			}
+			
+			
+		}else{
+			
+			 suma =a+b;
+		}
+		
+		return suma;
+	
+		
+	}
 	
 	
 }

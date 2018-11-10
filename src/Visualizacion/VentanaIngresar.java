@@ -88,8 +88,20 @@ public class VentanaIngresar extends JFrame {
 		JButton btnIngresar = new JButton("Ingresar");
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean error = false;
+				
+				
 				
 				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES")) {
+					
+					try {
+						int cant = Integer.parseInt(textFielddin.getText());
+					}catch(NumberFormatException e1){
+						error = true;
+					}
+					if(error) {
+						JOptionPane.showMessageDialog(null, "El valor insertado no es correcto", "ERROR EN EL FORMATO", JOptionPane.ERROR_MESSAGE);
+					}else {
 				
 				BD.ingresararsaldo(user.getNombre(), Float.parseFloat(textFielddin.getText())); 
 				VentanaIngresar.this.setVisible(false);
@@ -98,14 +110,15 @@ public class VentanaIngresar extends JFrame {
 				v.setVisible(true);
 				GestionFicheros.Ingresar(user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
 
+			
+				
+				
+			}
 			}else {
 				
 				JOptionPane.showMessageDialog(null,"DATOS NO VALIDOS" , "Acceso no autorizado", JOptionPane.ERROR_MESSAGE);
-				
-				
 			}
-			}
-		});
+			}});
 		btnIngresar.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		btnIngresar.setBounds(80, 213, 117, 29);
 		panel.add(btnIngresar);

@@ -85,7 +85,20 @@ public class VentanaRetirar extends JFrame {
 		JButton btnIngresar = new JButton("Retirar");
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES") ) {
+				
+				int cant = Integer.parseInt(textFielddin.getText());
+				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES")&& cant<=user.getDinero() ) {
+					
+					boolean error = false;
+					
+					try {
+						cant = Integer.parseInt(textFielddin.getText());
+					}catch(NumberFormatException e1){
+						error = true;
+					}
+					if(error) {
+						JOptionPane.showMessageDialog(null, "El valor insertado no es correcto", "ERROR EN EL FORMATO", JOptionPane.ERROR_MESSAGE);
+					}else {
 					
 				
 				BD.retirararsaldo(user.getNombre(), Float.parseFloat(textFielddin.getText())); 
@@ -95,13 +108,14 @@ public class VentanaRetirar extends JFrame {
 				v.setVisible(true);
 				
 				GestionFicheros.Retirar(user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
-				}else {
-					
-					JOptionPane.showMessageDialog(null,"DATOS NO VALIDOS" , "Acceso no autorizado", JOptionPane.ERROR_MESSAGE);
-					
 				}
-			}
-		});
+				
+			}else {
+				
+				JOptionPane.showMessageDialog(null,"DATOS NO VALIDOS" , "Acceso no autorizado", JOptionPane.ERROR_MESSAGE);
+				
+				
+			}}});
 		btnIngresar.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		btnIngresar.setBounds(80, 213, 117, 29);
 		panel.add(btnIngresar);

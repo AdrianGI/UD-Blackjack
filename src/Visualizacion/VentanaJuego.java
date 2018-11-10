@@ -254,6 +254,7 @@ public class VentanaJuego extends JFrame {
 				boolean error = false;
 				btnTerminarPartida.setEnabled(false);
 				
+				// Comprueba que no este vacio y haya int 
 				if(!Cantidad.getText().isEmpty()) {
 	
 					try {

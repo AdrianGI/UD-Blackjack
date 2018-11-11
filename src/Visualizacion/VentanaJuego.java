@@ -253,12 +253,12 @@ public class VentanaJuego extends JFrame {
 				
 				boolean error = false;
 				btnTerminarPartida.setEnabled(false);
-				
+				int cant = Integer.parseInt(Cantidad.getText());
 				// Comprueba que no este vacio y haya int 
-				if(!Cantidad.getText().isEmpty()) {
+				if(!Cantidad.getText().isEmpty()&& cant<=user.getDinero()) {
 	
 					try {
-						int cant = Integer.parseInt(Cantidad.getText());
+						 cant = Integer.parseInt(Cantidad.getText());
 					}catch(NumberFormatException e1){
 						error = true;
 					}
@@ -327,6 +327,7 @@ public class VentanaJuego extends JFrame {
 								System.out.println(ruta8);
 								conteoJugador = SumarCartas(conteoJugador, BD.obtenerValorCarta(ruta8));
 								label_2.setText(conteoJugador+"");
+								
 								if(conteoJugador>21) {
 									JOptionPane.showMessageDialog(null, "Te has Pasado:", "Ganador: Dealer", JOptionPane.INFORMATION_MESSAGE);
 									carta1J.removeAll();
@@ -361,7 +362,7 @@ public class VentanaJuego extends JFrame {
 								int i=0;
 								btnPedirCarta.setEnabled(false);
 								
-								while (ConteoDealer<17) {
+								if(ConteoDealer<17) {
 									
 								
 								String ruta2 = aRutas.get((int) Math.floor(Math.random()*48)); 
@@ -380,6 +381,28 @@ public class VentanaJuego extends JFrame {
 								
 								
 							}
+								if ( ConteoDealer>21) {
+									JOptionPane.showMessageDialog(null, "El Dealer se  ha pasado", "Ganador: Jugador", JOptionPane.INFORMATION_MESSAGE);
+									
+									carta1J.removeAll();
+									Carta2J.removeAll();
+									Carta3J.removeAll();
+									Carta4J.removeAll();
+									Carta5J.removeAll();
+								
+									carta1D.removeAll();
+									carta2D.removeAll();
+									carta3D.removeAll();
+									carta4D.removeAll();
+									carta5D.removeAll();
+								
+									label.setText("");
+									label_2.setText("");
+									label_1.setText("");
+									btnTerminarPartida.setEnabled(true);
+									
+								}
+								
 								btnPlantarse.setEnabled(false);
 								label.setText(ConteoDealer+"");
 								
@@ -401,7 +424,9 @@ public class VentanaJuego extends JFrame {
 									label_2.setText("");
 									label_1.setText("");
 									btnTerminarPartida.setEnabled(true);
-								
+									conteoJugador=0;
+									ConteoDealer=0;
+									
 								
 								
 							
@@ -437,16 +462,24 @@ public class VentanaJuego extends JFrame {
 		
 		int resultado=0;
 		
+		if ( dealer<=21  && dealer<=21 && dealer==jugador) {
+			JOptionPane.showMessageDialog(null, "EMPATE", "EMPATE", JOptionPane.INFORMATION_MESSAGE);
+			
+			resultado=0;
+			
+		}
 		if ( dealer==21  ||  dealer<21 && dealer>jugador) {
 			JOptionPane.showMessageDialog(null, "DEALER", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
 			
 			resultado=1;
 			
-		}else if(jugador==21 ) {
+		}
+		if(jugador==21 ) {
 				JOptionPane.showMessageDialog(null, "JUGADOR", "BLACKJACK GANADOR", JOptionPane.INFORMATION_MESSAGE);
 				
 				resultado=2;
-			}else if(jugador>21&& jugador>dealer) {
+			}
+		 if(jugador<21&& jugador>dealer) {
 				JOptionPane.showMessageDialog(null, "JUGADOR", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
 				resultado=3;
 				

@@ -13,13 +13,13 @@ import Datos.Usuario;
 
 public class BD {
 	
-	private Connection con;
+	private static Connection con;
 	private static Statement stmt;
 	
 	/**
 	 * Metodo que crea una sentencia para acceder a la base de datos 
 	 */
-	public void crearSentencia()
+	public static void crearSentencia()
 	{
 		try {
 			stmt = con.createStatement();
@@ -34,7 +34,7 @@ public class BD {
 	 * Metodo que permite conectarse a la base de datos
 	 */
 
-	public void conectar()
+	public static  void conectar()
 	{
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -89,7 +89,7 @@ public class BD {
 	 * 			1 - Si s� existe el usuario pero la contrase�a no es correcta
 	 * 			2 - Si el nombre de usuario es correcto y la contrase�a tambi�n
 	 */
-	public int existeUsuario(Usuario u){
+	public static int existeUsuario(Usuario u){
 		int resul = 0;
 		String query = "SELECT * FROM usuario WHERE nombre ='"+u.getNombre()+"'";
 		try {
@@ -316,6 +316,8 @@ public static void retirararsaldo( String nombre, float dinero) {
 		
 		
 	}
+	
+	
 	
 public static void resetearHasalido() {
 		

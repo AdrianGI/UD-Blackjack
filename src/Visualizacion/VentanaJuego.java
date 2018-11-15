@@ -40,6 +40,7 @@ public class VentanaJuego extends JFrame {
 	private JPanel contentPane, cartasJugador[] = new JPanel[5],cartasDealer[]= new JPanel[5];
 	private JTextField Cantidad;
 	private int jugador,dealer,numCartasJugadas,conteoJugador,ConteoDealer,numCartasDealer;
+	private ArrayList<String> aRutas =BD.obtenerRutasDeLaBaseDeDatos();
 	
 	public VentanaJuego(VentanaMenu ventanaanterior,Usuario user) {
 		setResizable(false);
@@ -250,8 +251,6 @@ public class VentanaJuego extends JFrame {
 		cartasDealer[3]= carta4D;
 		cartasDealer[4]= carta5D;
 		
-			
-		
 		
 		
 		JButton button = new JButton("Jugar");
@@ -263,7 +262,7 @@ public class VentanaJuego extends JFrame {
 				int cant = Integer.parseInt(Cantidad.getText());
 				// Comprueba que no este vacio y haya int 
 				if(!Cantidad.getText().isEmpty() && cant<=user.getDinero()) {
-	
+					
 					try {
 						 cant = Integer.parseInt(Cantidad.getText());
 					}catch(NumberFormatException e1){
@@ -275,11 +274,13 @@ public class VentanaJuego extends JFrame {
 				
 						label_1.setText(Cantidad.getText()+"€");
 						Cantidad.setText("");
-						ArrayList<String> aRutas =BD.obtenerRutasDeLaBaseDeDatos();
+						 aRutas =BD.obtenerRutasDeLaBaseDeDatos();
 						
 						
 						//Panel_1 DEALER
-						String ruta1 = aRutas.get((int) Math.floor(Math.random()*52)); 
+						String ruta1 = BD.obtenerCartaAleatoria();
+						BD.actualizarHasalidoCarta(ruta1);
+						
 						ImageIcon im = new ImageIcon(ruta1);
 						aRutas.remove(ruta1);
 						im.setDescription(ruta1);
@@ -294,7 +295,11 @@ public class VentanaJuego extends JFrame {
 						
 						
 						//JUgador panel_6
-						String ruta6 = aRutas.get((int) Math.floor(Math.random()*51)); 
+						
+						String ruta6= BD.obtenerCartaAleatoria();
+						BD.actualizarHasalidoCarta(ruta6);
+						
+						
 						aRutas.remove(ruta6);
 						ImageIcon im6 = new ImageIcon(ruta6);
 						im.setDescription(ruta6);
@@ -304,7 +309,10 @@ public class VentanaJuego extends JFrame {
 						conteoJugador += BD.obtenerValorCarta(ruta6);
 						
 						//panel_7
-						String ruta7 = aRutas.get((int) Math.floor(Math.random()*50)); 
+						
+						String ruta7= BD.obtenerCartaAleatoria();
+						BD.actualizarHasalidoCarta(ruta7);
+						
 						aRutas.remove(ruta7);
 						ImageIcon im7 = new ImageIcon(ruta7);
 						im7.setDescription(ruta7);
@@ -315,6 +323,7 @@ public class VentanaJuego extends JFrame {
 						
 						label.setText(BD.obtenerValorCarta(ruta1)+"");
 						label_2.setText(SumarCartas(BD.obtenerValorCarta(ruta6),BD.obtenerValorCarta(ruta7) )+"");
+					}
 						
 						if(conteoJugador==21) {
 							
@@ -335,6 +344,10 @@ public class VentanaJuego extends JFrame {
 							label_2.setText("");
 							label_1.setText("");
 							btnTerminarPartida.setEnabled(true);
+							conteoJugador=0;
+							ConteoDealer=0;
+							BD.resetearHasalido();
+							panel.updateUI();
 							
 							
 						}
@@ -349,7 +362,10 @@ public class VentanaJuego extends JFrame {
 									
 								
 								numCartasJugadas++;
-								String ruta8 = aRutas.get((int) Math.floor(Math.random()*49)); 
+								
+								String ruta8= BD.obtenerCartaAleatoria();
+								BD.actualizarHasalidoCarta(ruta8);
+								
 								aRutas.remove(ruta8);
 								ImageIcon im8 = new ImageIcon(ruta8);
 								im8.setDescription(ruta8);
@@ -358,6 +374,7 @@ public class VentanaJuego extends JFrame {
 								System.out.println(ruta8);
 								conteoJugador = SumarCartas(conteoJugador, BD.obtenerValorCarta(ruta8));
 								label_2.setText(conteoJugador+"");
+								}
 								
 								if(conteoJugador>21) {
 									JOptionPane.showMessageDialog(null, "Te has Pasado:", "Ganador: Dealer", JOptionPane.INFORMATION_MESSAGE);
@@ -379,6 +396,8 @@ public class VentanaJuego extends JFrame {
 									btnTerminarPartida.setEnabled(true);
 									conteoJugador=0;
 									ConteoDealer=0;
+									BD.resetearHasalido();
+									panel.updateUI();
 									
 									
 									
@@ -387,7 +406,7 @@ public class VentanaJuego extends JFrame {
 									btnPedirCarta.setEnabled(false);
 								
 							
-								}}});
+								}});
 						
 						
 						
@@ -400,7 +419,8 @@ public class VentanaJuego extends JFrame {
 								while(ConteoDealer<17) {
 									
 								
-								String ruta2 = aRutas.get((int) Math.floor(Math.random()*48)); 
+									String ruta2= BD.obtenerCartaAleatoria();
+									BD.actualizarHasalidoCarta(ruta2);
 								aRutas.remove(ruta2);
 								ImageIcon im2 = new ImageIcon(ruta2);
 								im2.setDescription(ruta2);
@@ -441,6 +461,8 @@ public class VentanaJuego extends JFrame {
 									btnTerminarPartida.setEnabled(true);
 									conteoJugador=0;
 									ConteoDealer=0;
+									BD.resetearHasalido();
+									panel.updateUI();
 									
 									
 								}else {
@@ -468,6 +490,8 @@ public class VentanaJuego extends JFrame {
 									btnTerminarPartida.setEnabled(true);
 									conteoJugador=0;
 									ConteoDealer=0;
+									BD.resetearHasalido();
+									panel.updateUI();
 									
 								
 								
@@ -480,7 +504,7 @@ public class VentanaJuego extends JFrame {
 						
 						
 						
-					}
+				
 				}else {
 						JOptionPane.showMessageDialog(null,"DATOS NO VALIDOS" , "Error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -527,6 +551,7 @@ public class VentanaJuego extends JFrame {
 		
 		
 	}
+	
 	
 	
 	

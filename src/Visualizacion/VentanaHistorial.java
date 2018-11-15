@@ -79,7 +79,8 @@ public class VentanaHistorial extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaHistorial.this.setVisible(true);
+				
+				VentanaHistorial.this.setVisible(false);
 				ventanaanterior.setVisible(true);
 			}
 		});

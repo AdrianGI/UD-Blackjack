@@ -12,3 +12,7 @@ adrian ha retirado 30.0€ al numero de cuenta ES2222111122221111
 adrian ha retirado 20.0€ al numero de cuenta ES0101010101010101
 10/10/2018     12:34:35
 adrian ha ingresado 10.0€ al numero de cuenta ES1100110011001111
+12/10/2018     17:45:56
+adrian ha ingresado 5.0€ al numero de cuenta ES7777777777777777
+12/10/2018     17:46:13
+adrian ha retirado 15.0€ al numero de cuenta ES6666777788889999

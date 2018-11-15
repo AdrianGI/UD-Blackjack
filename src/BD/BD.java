@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 import Datos.Carta;
 import Datos.Usuario;
@@ -95,7 +96,7 @@ public class BD {
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()){
 				//El usuario existe
-				String contrasenia = rs.getString(1);
+				String contrasenia = rs.getString(2);
 				if(contrasenia.equals(u.getContraseña()))
 					resul = 2;
 				else 
@@ -168,7 +169,7 @@ public static void retirararsaldo( String nombre, float dinero) {
 }
 
 
-public static int obtenerValorCarta(String ruta) {
+	public static int obtenerValorCarta(String ruta) {
 	
 	int valor=0;
 	String query= "SELECT valor FROM cartas WHERE imagen='"+ruta+"'";
@@ -208,7 +209,7 @@ public static int obtenerValorCarta(String ruta) {
 	return aCartas;
 }
 */
-public static float obtenerSaldo(String nombre){
+	public static float obtenerSaldo(String nombre){
 	String query = "SELECT dinero FROM usuario WHERE nombre ='"+nombre+"'";
 	ResultSet rs;
 	float saldo = 0;
@@ -224,7 +225,7 @@ public static float obtenerSaldo(String nombre){
 	return saldo;
 }
 
-public static ArrayList<String> obtenerRutasDeLaBaseDeDatos(){
+	public static ArrayList<String> obtenerRutasDeLaBaseDeDatos(){
 	ArrayList<String> aRutas = new ArrayList<String>();
 	String query = "SELECT imagen FROM cartas";
 	try {
@@ -241,8 +242,101 @@ public static ArrayList<String> obtenerRutasDeLaBaseDeDatos(){
 	return aRutas;
 }
 
-}
 
+	public static void ganaJugador( int dinero,String nombre) {
+		
+		
+		
+		try {
+			String query= "UPDATE usuario SET dinero= dinero+"+dinero+" WHERE nombre= '" + nombre+"'";
+
+			 stmt.executeUpdate(query);
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+		
+	public static void ganaDealer( int dinero,String nombre) {
+			
+			
+			
+			try {
+				String query= "UPDATE usuario SET dinero= dinero-"+dinero+" WHERE nombre= '" + nombre+"'";
 	
+				 stmt.executeUpdate(query);
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+
+
+
+	public static void actualizarHasalidoCarta( String ruta) {
+		
+		try {
+			String query= "UPDATE cartas SET Hasalido=1 WHERE imagen= '" + ruta+"'";
+	
+			 stmt.executeUpdate(query);
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static String obtenerCartaAleatoria() {
+		
+		String ruta = "";
+		
+		try{
+	
+		
+		String query= "SELECT imagen FROM cartas WHERE Hasalido=0 ORDER BY RANDOM() LIMIT 1"; //HASALIDO=0 //////////////////////////////////////////////////////// METODO ACTUALIZAR TODO HASALIDO=0
+		
+			ResultSet rs = stmt.executeQuery(query);
+			ruta = rs.getString(1);
+		System.out.println(ruta);
+			rs.close();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		return ruta;
+		
+		
+		
+	}
+	
+public static void resetearHasalido() {
+		
+	
+		int i=1;
+		while(i<52) {
+		try {
+			String query= "UPDATE cartas SET Hasalido=0 WHERE rownum= " +i;
+			i++;
+	
+			 stmt.executeUpdate(query);
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+}	
+	}
+	
+		
 	
 	

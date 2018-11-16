@@ -17,7 +17,7 @@ import Visualizacion.VentanaMenu;
 public class Main {
 
 	static Usuario u;
-	//Si existe archivo properties abre directamente la ventana principal, sino abre ventana inicio.
+	//Si existe archivo properties abre directamente la ventana menu, sino abre ventana inicio.
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		

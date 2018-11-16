@@ -50,7 +50,7 @@ public class BD {
 	/**
 	 * Metodo que cierra una sentencia 
 	 */
-	public void cerrarSentencia()
+	public static void cerrarSentencia()
 	{
 		try {
 			stmt.close();
@@ -63,7 +63,7 @@ public class BD {
 	/**
 	 * Metodo que permite desconectarse de la base de datos
 	 */
-	public void desconectar()
+	public  static void desconectar()
 	{
 		try {
 			cerrarSentencia();

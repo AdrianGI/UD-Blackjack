@@ -323,7 +323,6 @@ public class VentanaJuego extends JFrame {
 						
 						label.setText(BD.obtenerValorCarta(ruta1)+"");
 						label_2.setText(SumarCartas(BD.obtenerValorCarta(ruta6),BD.obtenerValorCarta(ruta7) )+"");
-					}
 						
 						if(conteoJugador==21) {
 							
@@ -352,6 +351,10 @@ public class VentanaJuego extends JFrame {
 							
 						}
 						
+					}
+						
+						
+						
 						btnPlantarse.setEnabled(true);
 						btnPedirCarta.setEnabled(true);
 						
@@ -374,9 +377,9 @@ public class VentanaJuego extends JFrame {
 								System.out.println(ruta8);
 								conteoJugador = SumarCartas(conteoJugador, BD.obtenerValorCarta(ruta8));
 								label_2.setText(conteoJugador+"");
-								}
+								}else {
 								
-								if(conteoJugador>21) {
+								
 									JOptionPane.showMessageDialog(null, "Te has Pasado:", "Ganador: Dealer", JOptionPane.INFORMATION_MESSAGE);
 									carta1J.removeAll();
 									Carta2J.removeAll();

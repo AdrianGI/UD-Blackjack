@@ -24,10 +24,8 @@ public class Main {
 		Main m = new Main();
 		u = new Usuario();
 		
-		VentanaInicioo vi = new VentanaInicioo();
-		vi.setVisible(true);
 		
-		/*try {
+		try {
 			BD.BD.conectar();
 			m.cargaProperties();
 			VentanaMenu vp = new VentanaMenu(u);
@@ -36,7 +34,7 @@ public class Main {
 			VentanaInicioo v = new VentanaInicioo();
 			v.setVisible(true);
 
-		}*/
+		}
 	}
 		
 		private static Properties properties;
@@ -54,7 +52,7 @@ public class Main {
 			properties = new Properties();
 			String usuario = " ";
 			String contrasenya = "";
-			properties.load(new FileInputStream("Usuarios.p"));
+			properties.load(new FileInputStream("usuarios.ini"));
 			usuario = properties.getProperty("usuario");
 			contrasenya = properties.getProperty("contraseña");
 			 u = new Usuario(usuario,contrasenya,0);
@@ -81,7 +79,7 @@ public class Main {
 
 			try {
 				
-				properties.store(new FileOutputStream("Usuarios.p"), "");
+				properties.store(new FileOutputStream("usuarios.ini"), "");
 
 			} catch (Exception e) {
 

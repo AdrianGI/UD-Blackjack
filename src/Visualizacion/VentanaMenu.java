@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import BD.BD;
+import Datos.Main;
 import Datos.Usuario;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextPane;
@@ -146,6 +149,20 @@ public class VentanaMenu extends JFrame {
 		contentPane.add(panelsur);
 		panelsur.setLayout(null);
 		
+		/*
+		 * Al cerrar la ventana se guarda el usuario en el archivo properties y se
+		 * cierra la conexion con la bd
+		 */
+		
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				BD.desconectar();
+				Main.guardaProperties(user);
+
+			}
+
+		});
+		
 		JButton btnNewButton = new JButton("Cerrar Sesion");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -158,6 +175,7 @@ public class VentanaMenu extends JFrame {
 		btnNewButton.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		btnNewButton.setBounds(250, 0, 141, 29);
 		panelsur.add(btnNewButton);
+		
 		
 		
 	}

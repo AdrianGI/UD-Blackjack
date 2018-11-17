@@ -103,7 +103,7 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnJugar.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnJugar.setBounds(89, 23, 227, 29);
+		btnJugar.setBounds(89, 16, 227, 29);
 		panel_Centro.add(btnJugar);
 		
 		JButton btnIngresarDinero = new JButton("Ingresar Dinero");
@@ -116,7 +116,7 @@ public class VentanaMenu extends JFrame {
 				a.setVisible(true);
 			}
 		});
-		btnIngresarDinero.setBounds(89, 65, 227, 29);
+		btnIngresarDinero.setBounds(89, 57, 227, 29);
 		panel_Centro.add(btnIngresarDinero);
 		
 	
@@ -130,7 +130,7 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnHistorial.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnHistorial.setBounds(89, 147, 227, 29);
+		btnHistorial.setBounds(89, 139, 227, 29);
 		panel_Centro.add(btnHistorial);
 		
 		JButton btnRetirarDinero = new JButton("Retirar Dinero");
@@ -142,8 +142,13 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnRetirarDinero.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnRetirarDinero.setBounds(89, 106, 227, 29);
+		btnRetirarDinero.setBounds(89, 98, 227, 29);
 		panel_Centro.add(btnRetirarDinero);
+		
+		JButton btnInstrucciones = new JButton("Instrucciones");
+		btnInstrucciones.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		btnInstrucciones.setBounds(89, 180, 227, 29);
+		panel_Centro.add(btnInstrucciones);
 		
 		JPanel panelsur = new JPanel();
 		panelsur.setBackground(Color.WHITE);
@@ -177,6 +182,21 @@ public class VentanaMenu extends JFrame {
 		btnNewButton.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		btnNewButton.setBounds(250, 0, 141, 29);
 		panelsur.add(btnNewButton);
+		
+		JButton button = new JButton("?");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				VentanaValorCartas a = new VentanaValorCartas(VentanaMenu.this);
+				a.setVisible(true);
+				VentanaMenu.this.setVisible(false);
+				
+				
+			}
+		});
+		button.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		button.setBounds(6, -1, 86, 29);
+		panelsur.add(button);
 		
 		
 		

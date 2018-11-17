@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
 import Datos.Usuario;
 import Ficheros.GestionFicheros;
 
@@ -37,6 +38,8 @@ public class VentanaRegistro extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	
+	
 
 	/**
 	 * Create the frame.

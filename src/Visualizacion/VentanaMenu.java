@@ -119,6 +119,8 @@ public class VentanaMenu extends JFrame {
 		btnIngresarDinero.setBounds(89, 65, 227, 29);
 		panel_Centro.add(btnIngresarDinero);
 		
+	
+		
 		JButton btnHistorial = new JButton("Historial");
 		btnHistorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

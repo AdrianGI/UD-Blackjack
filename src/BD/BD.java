@@ -90,6 +90,7 @@ public class BD {
 	 * 			2 - Si el nombre de usuario es correcto y la contrase�a tambi�n
 	 */
 	public static int existeUsuario(Usuario u){
+		
 		int resul = 0;
 		String query = "SELECT * FROM usuario WHERE nombre ='"+u.getNombre()+"'";
 		try {

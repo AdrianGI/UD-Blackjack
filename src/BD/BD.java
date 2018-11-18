@@ -1,5 +1,6 @@
 package BD;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,18 +8,31 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
+import com.sun.javafx.tools.packager.Log;
 
 import Datos.Carta;
 import Datos.Usuario;
 
 public class BD {
 	
+	
+	
 	private static Connection con;
 	private static Statement stmt;
+	private static Logger log;
+	
 	
 	/**
+	 * 
 	 * Metodo que crea una sentencia para acceder a la base de datos 
 	 */
+	
+	
 	public static void crearSentencia()
 	{
 		try {
@@ -36,6 +50,23 @@ public class BD {
 
 	public static  void conectar()
 	{
+		
+		log = Logger.getLogger("Log de la BD");
+		Handler manejadorArchivo= null;
+		try {
+			manejadorArchivo = new FileHandler("BD.log");
+			SimpleFormatter simpleFormatter = new SimpleFormatter();
+
+			manejadorArchivo.setFormatter(simpleFormatter);
+		} catch (SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		log.addHandler(manejadorArchivo);
+		
 		try {
 			Class.forName("org.sqlite.JDBC");
 			con= DriverManager.getConnection("jdbc:sqlite:proyecto.db");
@@ -129,8 +160,10 @@ public class BD {
 				e.printStackTrace();
 			}
 			registrado = true;
+			log.info(u.getNombre()+ " Registrado con Exito");
 		}else{
 			registrado = false;
+			log.info("Error Registrando a "+u.getNombre());
 		}
 		
 		return registrado;
@@ -143,10 +176,11 @@ public class BD {
 			String query= "UPDATE usuario SET dinero= dinero+"+dinero+" WHERE nombre= '" + nombre+"'";
 
 			stmt.executeUpdate(query);
-		
+			log.info(" Ingresado " + dinero + " € a " + nombre+ " Correctamente");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.severe("Error ingresando dinero a  "+ nombre );
 		}
 		
 	}
@@ -161,10 +195,11 @@ public static void retirararsaldo( String nombre, float dinero) {
 		String query= "UPDATE usuario SET dinero= dinero-"+dinero+" WHERE nombre= '" + nombre+"'";
 
 		 stmt.executeUpdate(query);
-	
+		 Log.info(" Retirado " + dinero + " € a " + nombre+ " Correctamente");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+		log.severe("Error retirando dinero a  "+ nombre );
 	}
 	
 }
@@ -179,11 +214,12 @@ public static void retirararsaldo( String nombre, float dinero) {
 		rs = stmt.executeQuery(query);
 		valor = rs.getInt(1);
 		rs.close();
-		
+		log.severe("Valor de Carta " + ruta+"Obtenido Correctamente" );
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+		log.severe("Error Obteniendo valor de carta " + ruta);
 	}
 			
 	return valor;
@@ -284,10 +320,12 @@ public static void retirararsaldo( String nombre, float dinero) {
 			String query= "UPDATE cartas SET Hasalido=1 WHERE imagen= '" + ruta+"'";
 	
 			 stmt.executeUpdate(query);
+			log.info("Campo Hasalido Actualizando correctamente");
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.info("Error Actualizando Campo Hasalido");
 		}
 		
 	}
@@ -305,11 +343,12 @@ public static void retirararsaldo( String nombre, float dinero) {
 			ruta = rs.getString(1);
 		System.out.println(ruta);
 			rs.close();
-			
+			log.info("Carta Obtenida Correctamente");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.info("Error en la obtención de carta");
 		}
 				
 		return ruta;

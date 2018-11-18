@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+import BD.BD;
 import Datos.Usuario;
 import Ficheros.GestionFicheros;
 
@@ -24,10 +24,17 @@ import javax.swing.SwingConstants;
 //import javax.mail.internet.MimeMessage;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
+
 
 
 import java.awt.Color;
@@ -38,7 +45,7 @@ public class VentanaRegistro extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	
+	private  static Logger log;
 	
 
 	/**
@@ -46,6 +53,30 @@ public class VentanaRegistro extends JFrame {
 	 */
 
 	public VentanaRegistro(VentanaInicioo ventanaanterior) {
+		
+		
+		log = Logger.getLogger("Log de la ventana principal");
+		Handler manejadorArchivo= null;
+		try {
+			manejadorArchivo = new FileHandler("VentanaPrincipal.log");
+			SimpleFormatter simpleFormatter = new SimpleFormatter();
+
+			manejadorArchivo.setFormatter(simpleFormatter);
+		} catch (SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		log.addHandler(manejadorArchivo);
+		
+		
+		
+		
+		
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(150, 150, 524, 303);
 		contentPane = new JPanel();
@@ -122,20 +153,26 @@ public class VentanaRegistro extends JFrame {
 				String usuario = textField.getText();
 				String contraseña = String.valueOf(passwordField.getPassword());
 				Usuario user = new Usuario(usuario, contraseña, 0);
-				int resul = VentanaInicioo.bd.existeUsuario(user);
+				int resul = BD.existeUsuario(user);
 				
 				if(resul==2){
+					if(usuario.equals("adrian")&& contraseña.equals("adrian")){
+						log.info("El administrador ha iniciado sesión");
+					}
+					log.info(usuario+" ha iniciado sesión");
 					JOptionPane.showMessageDialog(null, "BIENVENIDO","Acceso autorizado",JOptionPane.INFORMATION_MESSAGE);
 					VentanaMenu a = new VentanaMenu(user);
 					a.setVisible(true);
 					VentanaRegistro.this.setVisible(false);
 					
 				}
-				else if(resul==1)
+				else if(resul==1) {
 					JOptionPane.showMessageDialog(null, "CONTRASEÑA INCORRECTA","Acceso no autorizado",JOptionPane.ERROR_MESSAGE);
-				else{
+				log.severe("La contrase�a insertada por "+usuario+" no ha sido correcta");
+			}else{
 					int resp = JOptionPane.showConfirmDialog(null, "¿Quieres registrarte?","USUARIO NO REGISTRADO",JOptionPane.ERROR_MESSAGE);
 					if(resp == 0){
+						log.log(Level.INFO, "Se va a registrar un nuevo usuario");
 						
 						VentanaCrearUsuario vr = new VentanaCrearUsuario(ventanaanterior);
 						vr.setVisible(true);

@@ -377,7 +377,9 @@ public class VentanaJuego extends JFrame {
 								System.out.println(ruta8);
 								conteoJugador = SumarCartas(conteoJugador, BD.obtenerValorCarta(ruta8));
 								label_2.setText(conteoJugador+"");
-								}else {
+								}
+								
+								if ( conteoJugador>21) {
 								
 								
 									JOptionPane.showMessageDialog(null, "Te has Pasado:", "Ganador: Dealer", JOptionPane.INFORMATION_MESSAGE);
@@ -402,9 +404,9 @@ public class VentanaJuego extends JFrame {
 									BD.resetearHasalido();
 									panel.updateUI();
 									
-									
-									
 								}
+									
+								
 								if(numCartasJugadas == 5)
 									btnPedirCarta.setEnabled(false);
 								

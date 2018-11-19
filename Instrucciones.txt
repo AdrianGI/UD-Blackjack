@@ -1,0 +1,15 @@
+Al inicio de la partida deberas realizar tu apuesta,
+para cuando la apuesta este hecha el dealer o crupier
+ te repartira dos cartas descubiertas y una a si mismo,
+ tambien descubierta. Seguidamente el crupier te dara 
+paso a que juegues tu mano.Despues de que jueges tu mano,
+ finalmente el crupier jugara su mano dando a descubrir quien
+ es el ganador de la ronda,Si te quedas muy lejos 
+(entre el crupier y tu) o te has pasado de 21, pierdes 
+tu apuesta. Si se da el caso de que empatas con el crupier no
+ ganas ni pierdes, recuperas tu apuesta. Las apuestas ganadoras
+ con la jugada BlackJack se pagan 3 x 2 (que es lo mismo que decir
+ 1,5 x 1), el resto de apuestas ganadoras,se pagaran 1 x 1.Solo 
+dispondras de un turno para jugar tu mano, en el cual decidiras
+ si plantarte o pedir carta. Puedes pedir carta siempre que estes
+ por debajo de los 21 puntos.

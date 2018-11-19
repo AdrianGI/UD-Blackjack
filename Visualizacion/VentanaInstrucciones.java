@@ -2,7 +2,7 @@ package Visualizacion;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -81,14 +81,6 @@ public class VentanaInstrucciones extends JFrame {
 		panelSur.setOpaque(true);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				venatananterior.setVisible(true);
-				VentanaInstrucciones.this.setVisible(false);
-				
-			}
-			
-		});
 		
 		
 		panelSur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));

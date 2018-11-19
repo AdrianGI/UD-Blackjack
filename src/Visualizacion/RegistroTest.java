@@ -7,7 +7,7 @@ import BD.BD;
 import Datos.Usuario;
 import junit.framework.TestCase;
 
-class VentanaRegistroTest extends TestCase{
+class RegistroTest extends TestCase{
 	
 	
 	public void setUp() throws Exception {
@@ -48,10 +48,10 @@ class VentanaRegistroTest extends TestCase{
 	}
 	
 	
-	
-	/*void consultarContrasenyaIncorrecta()   {
+	@Test
+	void consultarContrasenyaIncorrecta()   {
 		
-		
+		BD.conectar();
 		
 		
 		String nombre1="adrian";
@@ -70,21 +70,24 @@ class VentanaRegistroTest extends TestCase{
 		
 		
 		
-		assertTrue("Contrasenya Incorrecta", BD.BD.existeUsuario(user1)==1);
-		assertTrue("Contrasenya Incorrecta", BD.BD.existeUsuario(user2)==1);
-		assertTrue("Contrasenya Incorrecta", BD.BD.existeUsuario(user3)==1);
+		assertTrue("Contrasenya Incorrecta", BD.existeUsuario(user1)==1);
+		assertTrue("Contrasenya Incorrecta", BD.existeUsuario(user2)==1);
+		assertTrue("Contrasenya Incorrecta", BD.existeUsuario(user3)==1);
 		
 	}
 	
+	@Test
 	void consultarValorCarta()  {
+		
+		BD.conectar();
 		
 		String ruta1="cartas/J pic.JPG"; 	// Carta J cuyo valor es 10
 		String ruta2="cartas/A dia.JPG";	//Carta AS cuyo valor es 1
 		String ruta3 ="cartas/7 dia.JPG";	// Carta 7 cuyo valor es 7
 		
-		assertTrue("Contrasenya Incorrecta", BD.BD.obtenerValorCarta(ruta1)==10);
-		assertTrue("Contrasenya Incorrecta", BD.BD.obtenerValorCarta(ruta2)==1);
-		assertTrue("Contrasenya Incorrecta", BD.BD.obtenerValorCarta(ruta3)==7);
+		assertTrue("Contrasenya Incorrecta", BD.obtenerValorCarta(ruta1)==10);
+		assertTrue("Contrasenya Incorrecta", BD.obtenerValorCarta(ruta2)==1);
+		assertTrue("Contrasenya Incorrecta", BD.obtenerValorCarta(ruta3)==7);
 	}
-	*/
+	
 }

@@ -214,7 +214,7 @@ public static void retirararsaldo( String nombre, float dinero) {
 		rs = stmt.executeQuery(query);
 		valor = rs.getInt(1);
 		rs.close();
-		log.severe("Valor de Carta " + ruta+"Obtenido Correctamente" );
+		log.info("Valor de Carta " + ruta+"Obtenido Correctamente" );
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block

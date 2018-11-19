@@ -146,6 +146,13 @@ public class VentanaMenu extends JFrame {
 		panel_Centro.add(btnRetirarDinero);
 		
 		JButton btnInstrucciones = new JButton("Instrucciones");
+		btnInstrucciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaInstrucciones v= new VentanaInstrucciones(VentanaMenu.this);
+				v.setVisible(true);
+				VentanaMenu.this.setVisible(false);
+			}
+		});
 		btnInstrucciones.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		btnInstrucciones.setBounds(89, 180, 227, 29);
 		panel_Centro.add(btnInstrucciones);

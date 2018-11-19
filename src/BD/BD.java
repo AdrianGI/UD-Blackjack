@@ -13,7 +13,7 @@ import java.util.logging.Handler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import com.sun.javafx.tools.packager.Log;
+//import com.sun.javafx.tools.packager.Log;
 
 import Datos.Carta;
 import Datos.Usuario;
@@ -195,7 +195,7 @@ public static void retirararsaldo( String nombre, float dinero) {
 		String query= "UPDATE usuario SET dinero= dinero-"+dinero+" WHERE nombre= '" + nombre+"'";
 
 		 stmt.executeUpdate(query);
-		 Log.info(" Retirado " + dinero + " € a " + nombre+ " Correctamente");
+		// Log.info(" Retirado " + dinero + " € a " + nombre+ " Correctamente");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

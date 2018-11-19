@@ -103,7 +103,7 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnJugar.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnJugar.setBounds(89, 16, 227, 29);
+		btnJugar.setBounds(89, 6, 227, 29);
 		panel_Centro.add(btnJugar);
 		
 		JButton btnIngresarDinero = new JButton("Ingresar Dinero");
@@ -116,7 +116,7 @@ public class VentanaMenu extends JFrame {
 				a.setVisible(true);
 			}
 		});
-		btnIngresarDinero.setBounds(89, 57, 227, 29);
+		btnIngresarDinero.setBounds(89, 47, 227, 29);
 		panel_Centro.add(btnIngresarDinero);
 		
 	
@@ -130,7 +130,7 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnHistorial.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnHistorial.setBounds(89, 139, 227, 29);
+		btnHistorial.setBounds(89, 129, 227, 29);
 		panel_Centro.add(btnHistorial);
 		
 		JButton btnRetirarDinero = new JButton("Retirar Dinero");
@@ -142,7 +142,7 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnRetirarDinero.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnRetirarDinero.setBounds(89, 98, 227, 29);
+		btnRetirarDinero.setBounds(89, 88, 227, 29);
 		panel_Centro.add(btnRetirarDinero);
 		
 		JButton btnInstrucciones = new JButton("Instrucciones");
@@ -154,7 +154,7 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnInstrucciones.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnInstrucciones.setBounds(89, 180, 227, 29);
+		btnInstrucciones.setBounds(89, 170, 227, 29);
 		panel_Centro.add(btnInstrucciones);
 		
 		JPanel panelsur = new JPanel();

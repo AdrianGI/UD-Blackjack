@@ -129,7 +129,7 @@ public class BD {
 			if(rs.next()){
 				//El usuario existe
 				String contrasenia = rs.getString(2);
-				if(contrasenia.equals(u.getContraseña()))
+				if(contrasenia.equals(u.getContrasenya()))
 					resul = 2;
 				else 
 					resul = 1;
@@ -152,7 +152,7 @@ public class BD {
 		boolean registrado;
 		int resul = existeUsuario(u);
 		if(resul==0){
-			String s = "INSERT INTO usuario(nombre,contraseña,dinero) VALUES('"+u.getNombre()+"','"+u.getContraseña()+"',"+u.getDinero()+ ")";
+			String s = "INSERT INTO usuario(nombre,contrasenya,dinero) VALUES('"+u.getNombre()+"','"+u.getContrasenya()+"',"+u.getDinero()+ ")";
 			try {
 				stmt.executeUpdate(s);
 			} catch (SQLException e) {

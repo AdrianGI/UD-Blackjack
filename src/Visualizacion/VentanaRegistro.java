@@ -99,9 +99,9 @@ public class VentanaRegistro extends JFrame {
 		panel_Mid.add(textField, "cell 1 0,grow");
 		textField.setColumns(10);
 
-		JLabel lblContraseña = new JLabel("Contrase\u00F1a");
-		lblContraseña.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_Mid.add(lblContraseña, "cell 0 1,alignx right,growy");
+		JLabel lblContrasenya = new JLabel("Contrase\u00F1a");
+		lblContrasenya.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_Mid.add(lblContrasenya, "cell 0 1,alignx right,growy");
 
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -151,12 +151,12 @@ public class VentanaRegistro extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String usuario = textField.getText();
-				String contraseña = String.valueOf(passwordField.getPassword());
-				Usuario user = new Usuario(usuario, contraseña, 0);
+				String contrasenya = String.valueOf(passwordField.getPassword());
+				Usuario user = new Usuario(usuario, contrasenya, 0);
 				int resul = BD.existeUsuario(user);
 				
 				if(resul==2){
-					if(usuario.equals("adrian")&& contraseña.equals("adrian")){
+					if(usuario.equals("adrian")&& contrasenya.equals("adrian")){
 						log.info("El administrador ha iniciado sesión");
 					}
 					log.info(usuario+" ha iniciado sesión");

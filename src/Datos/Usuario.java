@@ -3,7 +3,7 @@ package Datos;
 public class Usuario {
 
 	private String nombre;
-	private String contraseña;
+	private String contrasenya;
 	private float dinero;
 	private String numCuenta;
 	
@@ -12,9 +12,9 @@ public class Usuario {
 
 	}
 	
-	public Usuario(String nombre, String contraseña,long dinero) {
+	public Usuario(String nombre, String contrasenya,long dinero) {
 		this.setNombre(nombre);
-		this.setContraseña(contraseña);
+		this.setContrasenya(contrasenya);
 		this.setDinero(dinero);
 		
 		
@@ -30,12 +30,12 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasenya() {
+		return contrasenya;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenya(String contrasenya) {
+		this.contrasenya = contrasenya;
 	}
 	
 	

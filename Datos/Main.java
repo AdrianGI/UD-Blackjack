@@ -54,7 +54,7 @@ public class Main {
 			String contrasenya = "";
 			properties.load(new FileInputStream("usuarios.ini"));
 			usuario = properties.getProperty("usuario");
-			contrasenya = properties.getProperty("contrasenya");
+			contrasenya = properties.getProperty("contraseña");
 			 u = new Usuario(usuario,contrasenya,0);
 			int a = BD.BD.existeUsuario(u);
 			if (a!=0 && a!=1 && a!=2) {
@@ -75,7 +75,7 @@ public class Main {
 			String contrasenya = u.getContrasenya();
 
 			properties.setProperty("usuario", usuario);
-			properties.setProperty("contrasenya", contrasenya);
+			properties.setProperty("contraseña", contrasenya);
 
 			try {
 				

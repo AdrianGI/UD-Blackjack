@@ -29,6 +29,9 @@ import javax.swing.ImageIcon;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
@@ -41,6 +44,9 @@ public class VentanaJuego extends JFrame {
 	private JTextField Cantidad;
 	private int jugador,dealer,numCartasJugadas,conteoJugador,ConteoDealer,numCartasDealer;
 	private ArrayList<String> aRutas =BD.obtenerRutasDeLaBaseDeDatos();
+	JLabel reloj = new JLabel("");
+	
+	private int hora,minuto,segundos;
 	
 	public VentanaJuego(VentanaMenu ventanaanterior,Usuario user) {
 		setResizable(false);
@@ -161,6 +167,10 @@ public class VentanaJuego extends JFrame {
 		btnPedirCarta.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		panelE.add(btnPedirCarta, "cell 0 5,alignx center");
 		
+		
+		reloj.setFont(new Font("Monospaced", Font.PLAIN, 13));
+		panelE.add(reloj, "cell 0 7");
+		
 		JButton btnPlantarse = new JButton("Plantarse");
 		
 		btnPlantarse.setEnabled(false);
@@ -271,7 +281,8 @@ public class VentanaJuego extends JFrame {
 					if(error) {
 						JOptionPane.showMessageDialog(null, "El valor insertado no es correcto", "ERROR EN EL FORMATO", JOptionPane.ERROR_MESSAGE);
 					}else {
-				
+						
+						
 						label_1.setText(Cantidad.getText()+"€");
 						Cantidad.setText("");
 						 aRutas =BD.obtenerRutasDeLaBaseDeDatos();
@@ -472,6 +483,7 @@ public class VentanaJuego extends JFrame {
 									
 								}else {
 								
+								
 								btnPlantarse.setEnabled(false);
 								label.setText(ConteoDealer+"");
 								
@@ -501,7 +513,7 @@ public class VentanaJuego extends JFrame {
 								
 								
 							
-								}	}});
+								} }});
 						
 						
 						
@@ -516,6 +528,8 @@ public class VentanaJuego extends JFrame {
 					
 			panel.updateUI();
 			}
+
+			
 				
 			
 			
@@ -527,8 +541,65 @@ public class VentanaJuego extends JFrame {
 		panelS.add(button, "cell 3 0,alignx right");
 		
 
-
+		Thread t =  new Thread(r);
+		t.start();
+		
 	}
+	
+	Runnable r =  new Runnable() {
+		
+
+		@Override
+		public void run() {
+			
+			reloj.setText(calcula());
+			
+			
+			
+			
+			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(1000);
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				
+		}
+
+		private String calcula() {
+			// TODO Auto-generated method stub
+			Calendar calendario= new GregorianCalendar();
+			Date fechaactual= new Date();
+			calendario.setTime(fechaactual);
+			String ampm = calendario.get(Calendar.AM_PM)==	Calendar.AM?"AM":"PM";
+			String hora="";
+			String f;
+			
+			
+			if(ampm.equals("PM")){
+				
+				int h = calendario.get((Calendar.HOUR_OF_DAY))-12;
+				 hora= h>9? ""+ h:"0"+h;
+				
+			}else {
+					
+					 hora = calendario.get(Calendar.HOUR_OF_DAY)>9?""+ calendario.get(Calendar.HOUR_OF_DAY):"0"+calendario.get(Calendar.HOUR_OF_DAY);
+					
+			}
+				String minutos= calendario.get(Calendar.MINUTE)>9?""+ calendario.get(Calendar.MINUTE):"0"+calendario.get(Calendar.MINUTE);
+				String segundos= calendario.get(Calendar.SECOND)>9?""+ calendario.get(Calendar.SECOND):"0"+calendario.get(Calendar.SECOND);
+				f= hora+":"+minutos+":"+segundos+" "+ ampm;
+				return f;
+				
+				
+			}
+			
+		
+		
+		
+	};
 	
 	private int  determinarGanador(int jugador, int dealer) {
 		
@@ -584,6 +655,4 @@ public class VentanaJuego extends JFrame {
 		
 	}
 	
-	
-	
-}
+}	

@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +29,7 @@ import javax.swing.JTextPane;
 public class VentanaMenu extends JFrame {
 
 	private JPanel contentPane;
+	
 
 	/**
 	 * Launch the application.
@@ -34,6 +39,7 @@ public class VentanaMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaMenu(Usuario user) {
+		Properties properties = new Properties();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -180,9 +186,12 @@ public class VentanaMenu extends JFrame {
 		JButton btnNewButton = new JButton("Cerrar Sesion");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				VentanaInicioo a = new VentanaInicioo();
 				a.setVisible(true);
 				VentanaMenu.this.setVisible(false);
+				
+				
 				
 			}
 		});

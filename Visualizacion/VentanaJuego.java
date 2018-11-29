@@ -49,6 +49,8 @@ public class VentanaJuego extends JFrame {
 	private int hora,minuto,segundos;
 	
 	public VentanaJuego(VentanaMenu ventanaanterior,Usuario user) {
+		
+		
 		setResizable(false);
 		numCartasJugadas = 2;
 		conteoJugador = 0;
@@ -168,8 +170,9 @@ public class VentanaJuego extends JFrame {
 		panelE.add(btnPedirCarta, "cell 0 5,alignx center");
 		
 		
-		reloj.setFont(new Font("Monospaced", Font.PLAIN, 13));
-		panelE.add(reloj, "cell 0 7");
+		reloj.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		reloj.setForeground(Color.WHITE);
+		panelE.add(reloj, "cell 0 1");
 		
 		JButton btnPlantarse = new JButton("Plantarse");
 		
@@ -539,10 +542,9 @@ public class VentanaJuego extends JFrame {
 		button.setHorizontalAlignment(SwingConstants.LEADING);
 		button.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		panelS.add(button, "cell 3 0,alignx right");
-		
-
 		Thread t =  new Thread(r);
 		t.start();
+
 		
 	}
 	
@@ -551,15 +553,19 @@ public class VentanaJuego extends JFrame {
 
 		@Override
 		public void run() {
+			boolean condicion=true;
+			while(condicion) {
+				reloj.setText(calcula());	
+	
 			
-			reloj.setText(calcula());
-			
-			
+			}
 			
 			
 			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(1000);
+			
+
 				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

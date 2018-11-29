@@ -53,6 +53,7 @@ public class Main {
 			String usuario = " ";
 			String contrasenya = "";
 			properties.load(new FileInputStream("usuarios.ini"));
+			properties.remove(new FileInputStream("usuarios.ini"));
 			usuario = properties.getProperty("usuario");
 			contrasenya = properties.getProperty("contraseña");
 			 u = new Usuario(usuario,contrasenya,0);
@@ -61,6 +62,8 @@ public class Main {
 				throw new IOException();
 			}
 		}
+		
+		
 
 		/**
 		 * Guarda en fichero el usuario y la contrasenya
@@ -87,5 +90,9 @@ public class Main {
 		
 	
 	}
+		
+		
+		}
 
-}
+
+

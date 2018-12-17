@@ -24,6 +24,7 @@ public class VentanaInicioo extends JFrame {
 	public static BD bd;
 	private JPanel contentPane;
 	
+	
 	public VentanaInicioo() {
 		setResizable(false);
 		

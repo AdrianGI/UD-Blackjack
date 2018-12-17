@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -34,7 +35,7 @@ public class VentanaHistorial extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaHistorial(VentanaMenu ventanaanterior) {
+	public VentanaHistorial(VentanaMenu ventanaanterior,Usuario u) {
 		setBackground(Color.WHITE);
 		setResizable(false);
 		
@@ -55,7 +56,7 @@ public class VentanaHistorial extends JFrame {
 
 		textArea = new JTextArea();
 		textArea.setEditable(false);
-		sacarHistorial();
+		sacarHistorial(u);
 		
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		scrollPane.setBorder(null);
@@ -96,10 +97,36 @@ public class VentanaHistorial extends JFrame {
 	}
 	
 	
-	private void sacarHistorial() {
+	private void sacarHistorial(Usuario user) {
 		
+		
+		if(user.getNombre().equals("adrian") && user.getContrasenya().equals("adrian")) {
+			ArrayList<String> usuarios = new ArrayList<String>();
+			usuarios=BD.BD.obtenerUsuarios();
+			for(int i=0;i<usuarios.size();i++){
+				try {
+				BufferedReader leer= new BufferedReader(new FileReader(usuarios.get(i)+".txt"));
+				String linea=leer.readLine();
+				while(linea!=null) {
+				textArea.append(linea+"\n");
+				linea=leer.readLine();
+				}
+				leer.close();
+			}catch (IOException e1) {
+				// TODO Auto-generated catch block
+				//e1.printStackTrace();
+			}
+
+			}
+		}else {
 		try {
-			BufferedReader leer= new BufferedReader(new FileReader("Historial.txt"));
+			String nomfich;
+			if(VentanaRegistro.nomfich!=null)
+				nomfich = VentanaRegistro.nomfich;
+			else
+				nomfich = VentanaMenu.getUser().getNombre()+".txt";
+			System.out.println(nomfich);
+			BufferedReader leer= new BufferedReader(new FileReader(nomfich));
 			String linea=leer.readLine();
 			while(linea!=null) {
 			textArea.append(linea+"\n");
@@ -111,7 +138,7 @@ public class VentanaHistorial extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		}
 		
 		
 		

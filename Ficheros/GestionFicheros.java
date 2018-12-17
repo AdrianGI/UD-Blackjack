@@ -19,7 +19,7 @@ import Datos.Usuario;
 public class GestionFicheros {
 
 
-public static void Ingresar( String nombre,String numCuenta,float dinero) {
+public static void Ingresar( String nomfich, String nombre,String numCuenta,float dinero) {
 	
 	try {
 		GregorianCalendar gc = new GregorianCalendar();
@@ -32,7 +32,7 @@ public static void Ingresar( String nombre,String numCuenta,float dinero) {
 		int segundos=gc.get(GregorianCalendar.SECOND
 				);
 	PrintWriter pw = null;
-	File f = new File("Historial.txt");
+	File f = new File(nomfich);
 	if(!f.exists())
 		pw = new PrintWriter(f);
 	else
@@ -57,7 +57,7 @@ public static void Ingresar( String nombre,String numCuenta,float dinero) {
 
 	
 	
-public static void Retirar( String nombre,String numCuenta,float dinero) {
+public static void Retirar( String nomfich, String nombre,String numCuenta,float dinero) {
 	
 	try {
 		GregorianCalendar gc = new GregorianCalendar();
@@ -71,7 +71,7 @@ public static void Retirar( String nombre,String numCuenta,float dinero) {
 		int segundos=gc.get(GregorianCalendar.SECOND
 				);
 	PrintWriter pw = null;
-	File f = new File("Historial.txt");
+	File f = new File(nomfich);
 	if(!f.exists())
 		pw = new PrintWriter(f);
 	else

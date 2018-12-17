@@ -152,7 +152,7 @@ public class BD {
 		boolean registrado;
 		int resul = existeUsuario(u);
 		if(resul==0){
-			String s = "INSERT INTO usuario(nombre,contrasenya,dinero) VALUES('"+u.getNombre()+"','"+u.getContrasenya()+"',"+u.getDinero()+ ")";
+			String s = "INSERT INTO usuario(nombre,contraseña,dinero) VALUES('"+u.getNombre()+"','"+u.getContrasenya()+"',"+u.getDinero()+ ")";
 			try {
 				stmt.executeUpdate(s);
 			} catch (SQLException e) {
@@ -377,6 +377,23 @@ public static void resetearHasalido() {
 		
 	}
 }	
+
+public static ArrayList<String> obtenerUsuarios(){
+	ArrayList<String> usuarios = new ArrayList<String>();
+	String query = "SELECT nombre FROM usuario";
+	try {
+		ResultSet rs = stmt.executeQuery(query);
+		while(rs.next()){
+			String nombre = rs.getString(1);
+			usuarios.add(nombre);
+		}
+		rs.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return usuarios;
+}
 	}
 	
 		

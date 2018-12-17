@@ -87,7 +87,7 @@ public class VentanaRetirar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				int cant = Integer.parseInt(textFielddin.getText());
-				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES")&& cant<=user.getDinero() ) {
+				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES")&& cant<=user.getDinero()&& cant<=500 ) {
 					
 					boolean error = false;
 					
@@ -107,7 +107,7 @@ public class VentanaRetirar extends JFrame {
 				VentanaMenu v = new VentanaMenu(user);
 				v.setVisible(true);
 				
-				GestionFicheros.Retirar(user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
+				GestionFicheros.Retirar(VentanaRegistro.nomfich,user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
 				}
 				
 			}else {

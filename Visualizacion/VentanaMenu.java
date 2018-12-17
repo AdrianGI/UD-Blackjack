@@ -29,7 +29,7 @@ import javax.swing.JTextPane;
 public class VentanaMenu extends JFrame {
 
 	private JPanel contentPane;
-	
+	private static Usuario u;
 
 	/**
 	 * Launch the application.
@@ -38,7 +38,11 @@ public class VentanaMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	public static Usuario getUser() {
+		return u;
+	}
 	public VentanaMenu(Usuario user) {
+		u = user;
 		Properties properties = new Properties();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -131,7 +135,7 @@ public class VentanaMenu extends JFrame {
 		btnHistorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaMenu.this.setVisible(false);
-				VentanaHistorial a = new VentanaHistorial(VentanaMenu.this);
+				VentanaHistorial a = new VentanaHistorial(VentanaMenu.this,user);
 				a.setVisible(true);
 			}
 		});

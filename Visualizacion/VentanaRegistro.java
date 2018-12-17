@@ -46,7 +46,7 @@ public class VentanaRegistro extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private  static Logger log;
-	
+	public static String nomfich;
 
 	/**
 	 * Create the frame.
@@ -161,6 +161,7 @@ public class VentanaRegistro extends JFrame {
 					}
 					log.info(usuario+" ha iniciado sesión");
 					JOptionPane.showMessageDialog(null, "BIENVENIDO","Acceso autorizado",JOptionPane.INFORMATION_MESSAGE);
+					nomfich=usuario+".txt";
 					VentanaMenu a = new VentanaMenu(user);
 					a.setVisible(true);
 					VentanaRegistro.this.setVisible(false);

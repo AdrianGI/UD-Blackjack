@@ -90,12 +90,12 @@ public class VentanaIngresar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				boolean error = false;
 				
+				int cant = Integer.parseInt(textFielddin.getText());
 				
-				
-				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES")) {
+				if(!textFieldnum.getText().isEmpty()&& textFieldnum.getText().length()==18 && textFieldnum.getText().startsWith("ES")&& cant<=500) {
 					
 					try {
-						int cant = Integer.parseInt(textFielddin.getText());
+						 cant = Integer.parseInt(textFielddin.getText());
 					}catch(NumberFormatException e1){
 						error = true;
 					}
@@ -108,7 +108,7 @@ public class VentanaIngresar extends JFrame {
 				ventanaanterior.setVisible(false);
 				VentanaMenu v = new VentanaMenu(user);
 				v.setVisible(true);
-				GestionFicheros.Ingresar(user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
+				GestionFicheros.Ingresar(VentanaRegistro.nomfich,user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
 
 			
 				

@@ -44,6 +44,7 @@ public class VentanaJuego extends JFrame {
 	private JTextField Cantidad;
 	private int jugador,dealer,numCartasJugadas,conteoJugador,ConteoDealer,numCartasDealer;
 	private ArrayList<String> aRutas =BD.obtenerRutasDeLaBaseDeDatos();
+	private int cant;
 	JLabel reloj = new JLabel("");
 	JLabel label = new JLabel("");
 	JPanel panel = new JPanel();
@@ -63,12 +64,12 @@ public class VentanaJuego extends JFrame {
 	JPanel carta4D = new JPanel();
 	JPanel carta3D = new JPanel();
 	JPanel carta5D = new JPanel();
-	private int hora,minuto,segundos;
+	private int hora,minuto,segundos,dact,din;
 	private JButton btnPedirCarta, btnPlantarse;
 	
 	public VentanaJuego(VentanaMenu ventanaanterior,Usuario user) {
 		
-	
+		din=(int) (user.getDinero());
 		setResizable(false);
 		numCartasJugadas = 2;
 		conteoJugador = 0;
@@ -126,6 +127,7 @@ public class VentanaJuego extends JFrame {
 		 btnTerminarPartida = new JButton("Terminar Partida");
 		btnTerminarPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BD.actualizarsaldo(user.getNombre(), din);
 				VentanaJuego.this.setVisible(false);
 				VentanaMenu a = new VentanaMenu(user);
 				a.setVisible(true);
@@ -141,7 +143,7 @@ public class VentanaJuego extends JFrame {
 		panelO.setLayout(new MigLayout("", "[50px][30px]", "[50px][][][][][][][][][][][][][][][][][][][][][][][]"));
 		panelO.setOpaque(false);
 		
-		JLabel lblDealer = new JLabel("Dealer");
+		JLabel lblDealer = new JLabel("Crupier");
 		lblDealer.setForeground(Color.WHITE);
 		lblDealer.setFont(new Font("Monospaced", Font.PLAIN, 20));
 		panelO.add(lblDealer, "cell 0 1");
@@ -334,15 +336,16 @@ public class VentanaJuego extends JFrame {
 						cartasDealer[numCartasDealer+i].add(lblFoto2);
 						cartasDealer[numCartasDealer+i].updateUI();
 						i++;
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 					System.out.println(ruta2);
 					ConteoDealer=SumarCartas(ConteoDealer,BD.obtenerValorCarta(ruta2));
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					
 				
 				}
 				
@@ -351,8 +354,10 @@ public class VentanaJuego extends JFrame {
 					btnPlantarse.setEnabled(false);
 					label.setText(ConteoDealer+"");
 					//cartasDealer[numCartasDealer+i].add(lblFoto2);
-					JOptionPane.showMessageDialog(null, "El Dealer se  ha pasado", "Ganador: Jugador", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Ganador: Jugador", "El Dealer se  ha pasado", JOptionPane.INFORMATION_MESSAGE);
 					finjuego();
+					din=din+(2*cant);
+					 labelDin.setText(din+"€");
 					System.out.println("Esta en el if del conteo dealer");
 					
 				}else {
@@ -361,11 +366,24 @@ public class VentanaJuego extends JFrame {
 					btnPlantarse.setEnabled(false);
 					label.setText(ConteoDealer+"");
 					
-					determinarGanador(conteoJugador,ConteoDealer);
-					
+					if(determinarGanador(conteoJugador,ConteoDealer)==3) {
+						din=din+(2*cant);
+						 labelDin.setText(din +"€");
+						 JOptionPane.showMessageDialog(null, "JUGADOR", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+						 
+					}else if(determinarGanador(conteoJugador,ConteoDealer)==1){
+						JOptionPane.showMessageDialog(null, "EMPATE", "EMPATE", JOptionPane.INFORMATION_MESSAGE);
+						din=din+cant;
+						 labelDin.setText(din +"€");
+						
+					}else if(determinarGanador(conteoJugador,ConteoDealer)==2) {
+						JOptionPane.showMessageDialog(null, "DEALER", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+						
+					}
+					}
 					finjuego();
 					
-				} }});
+				 }});
 		
 
 		
@@ -387,7 +405,8 @@ public class VentanaJuego extends JFrame {
 				cartasDealer[4]= carta5D;
 				boolean error = false;
 				btnTerminarPartida.setEnabled(false);
-				int cant = Integer.parseInt(Cantidad.getText());
+				cant = Integer.parseInt(Cantidad.getText());
+				
 				// Comprueba que no este vacio y haya int 
 				if(!Cantidad.getText().isEmpty() && cant<=user.getDinero()) {
 					
@@ -404,7 +423,9 @@ public class VentanaJuego extends JFrame {
 						label_1.setText(Cantidad.getText()+"€");
 						Cantidad.setText("");
 						 aRutas =BD.obtenerRutasDeLaBaseDeDatos();
-						
+						 
+						  din=din-cant;
+						 labelDin.setText(din+"€");
 						
 						//Panel_1 DEALER
 						String ruta1 = BD.obtenerCartaAleatoria();
@@ -454,10 +475,11 @@ public class VentanaJuego extends JFrame {
 						label_2.setText(SumarCartas(BD.obtenerValorCarta(ruta6),BD.obtenerValorCarta(ruta7) )+"");
 						System.out.println("Entra a las 2 primeras cartas");
 						
-						if(conteoJugador==21) {
+						if(SumarCartas(BD.obtenerValorCarta(ruta6),BD.obtenerValorCarta(ruta7))==21) {
 							
 							JOptionPane.showMessageDialog(null, "JUGADOR", "BLACKJACK GANADOR", JOptionPane.INFORMATION_MESSAGE);
-
+							din=din+cant+(2/3*cant);
+							 labelDin.setText(din +"€");
 							finjuego();
 							
 						}
@@ -563,17 +585,16 @@ public class VentanaJuego extends JFrame {
 		int resultado=0;
 		
 		if ( dealer<=21  && jugador<=21 && dealer==jugador) {
-			JOptionPane.showMessageDialog(null, "EMPATE", "EMPATE", JOptionPane.INFORMATION_MESSAGE);
+			
 			
 			resultado=1;
 			
 		}else if( dealer==21 && dealer>jugador ||  dealer<21 && dealer>jugador) {
-			JOptionPane.showMessageDialog(null, "DEALER", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
 			
 			resultado=2;
 			
 		}else if (jugador<=21 && jugador>dealer) {
-				JOptionPane.showMessageDialog(null, "JUGADOR", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+				
 				resultado=3;
 				
 			}

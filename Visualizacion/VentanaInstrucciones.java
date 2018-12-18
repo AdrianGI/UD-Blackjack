@@ -31,7 +31,7 @@ public class VentanaInstrucciones extends JFrame {
 	 * Create the frame.
 	 * @param venatananterior 
 	 */
-	public VentanaInstrucciones(VentanaMenu venatananterior) {
+	public VentanaInstrucciones(VentanaMenu ventanaanterior) {
 		setBackground(Color.WHITE);
 		setResizable(false);
 		
@@ -81,8 +81,17 @@ public class VentanaInstrucciones extends JFrame {
 		panelSur.setOpaque(true);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				VentanaInstrucciones.this.setVisible(false);
+				ventanaanterior.setVisible(true);
+				
+			}
+		});
 		
 		
+		
+	
 		panelSur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		btnVolver.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		panelSur.add(btnVolver);

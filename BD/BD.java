@@ -169,6 +169,24 @@ public class BD {
 		return registrado;
 	}
 	
+	
+	
+public static void actualizarsaldo( String nombre, float dinero) {
+		
+		
+		try {
+			String query= "UPDATE usuario SET dinero="+dinero+" WHERE nombre= '" + nombre+"'";
+
+			stmt.executeUpdate(query);
+			log.info("Saldo de " + nombre+ " Actualizado Correctamente");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.severe("Error actualizando saldo de  "+ nombre );
+		}
+		
+	}
+	
 	public static void ingresararsaldo( String nombre, float dinero) {
 		
 		

@@ -107,7 +107,7 @@ public class VentanaRetirar extends JFrame {
 				VentanaMenu v = new VentanaMenu(user);
 				v.setVisible(true);
 				
-				GestionFicheros.Retirar(VentanaRegistro.nomfich,user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
+				GestionFicheros.Retirar(user.getNombre(),user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
 				}
 				
 			}else {

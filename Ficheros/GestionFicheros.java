@@ -32,7 +32,7 @@ public static void Ingresar( String nomfich, String nombre,String numCuenta,floa
 		int segundos=gc.get(GregorianCalendar.SECOND
 				);
 	PrintWriter pw = null;
-	File f = new File(nomfich);
+	File f = new File(nomfich+".txt");
 	if(!f.exists())
 		pw = new PrintWriter(f);
 	else
@@ -71,7 +71,7 @@ public static void Retirar( String nomfich, String nombre,String numCuenta,float
 		int segundos=gc.get(GregorianCalendar.SECOND
 				);
 	PrintWriter pw = null;
-	File f = new File(nomfich);
+	File f = new File(nomfich+".txt");
 	if(!f.exists())
 		pw = new PrintWriter(f);
 	else

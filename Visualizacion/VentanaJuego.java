@@ -354,7 +354,7 @@ public class VentanaJuego extends JFrame {
 					btnPlantarse.setEnabled(false);
 					label.setText(ConteoDealer+"");
 					//cartasDealer[numCartasDealer+i].add(lblFoto2);
-					JOptionPane.showMessageDialog(null,"Ganador: Jugador", "El Dealer se  ha pasado", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Ganador: Jugador", "El Crupier se  ha pasado", JOptionPane.INFORMATION_MESSAGE);
 					finjuego();
 					din=din+(2*cant);
 					 labelDin.setText(din+"€");
@@ -377,7 +377,7 @@ public class VentanaJuego extends JFrame {
 						 labelDin.setText(din +"€");
 						
 					}else if(determinarGanador(conteoJugador,ConteoDealer)==2) {
-						JOptionPane.showMessageDialog(null, "DEALER", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "CRUPIER", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
 						
 					}
 					}
@@ -408,7 +408,7 @@ public class VentanaJuego extends JFrame {
 				cant = Integer.parseInt(Cantidad.getText());
 				
 				// Comprueba que no este vacio y haya int 
-				if(!Cantidad.getText().isEmpty() && cant<=user.getDinero()) {
+				if(!Cantidad.getText().isEmpty() && cant<=user.getDinero()&& cant!=0) {
 					
 					try {
 						 cant = Integer.parseInt(Cantidad.getText());

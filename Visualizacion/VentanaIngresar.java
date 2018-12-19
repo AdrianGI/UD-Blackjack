@@ -108,7 +108,7 @@ public class VentanaIngresar extends JFrame {
 				ventanaanterior.setVisible(false);
 				VentanaMenu v = new VentanaMenu(user);
 				v.setVisible(true);
-				GestionFicheros.Ingresar(VentanaRegistro.nomfich,user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
+				GestionFicheros.Ingresar(user.getNombre(),user.getNombre(), textFieldnum.getText(), Float.parseFloat(textFielddin.getText()));
 
 			
 				

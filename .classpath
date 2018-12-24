@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="/Users/adriangarridoibanez/Desktop/UD-Blackjack/miglayout-3.7.jar"/>
 	<classpathentry kind="lib" path="/Users/adriangarridoibanez/Desktop/UD-Blackjack/sqlite-jdbc-3.14.2.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="/Users/adriangarridoibanez/Desktop/UD-Blackjack/javax.mail.jar"/>
+	<classpathentry kind="lib" path="/Users/adriangarridoibanez/Desktop/UD-Blackjack/activation.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

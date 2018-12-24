@@ -222,6 +222,23 @@ public static void retirararsaldo( String nombre, float dinero) {
 	
 }
 
+public static String olvidarContra(String nombre) {
+
+	String pass = "";
+
+	try {
+		
+		ResultSet rs = stmt.executeQuery("SELECT contraseña FROM usuario WHERE nombre ='" + nombre + "'");
+		while (rs.next()) {
+			pass = rs.getString(1);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	return pass;
+}
 
 	public static int obtenerValorCarta(String ruta) {
 	

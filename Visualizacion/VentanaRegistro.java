@@ -9,19 +9,13 @@ import BD.BD;
 import Datos.Usuario;
 import Ficheros.GestionFicheros;
 
-//import aplicacionusuario.datos.BD;
-//import aplicacionusuario.datos.Usuario;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
-//import javax.mail.Message;
-//import javax.mail.Session;
-//import javax.mail.Transport;
-//import javax.mail.internet.InternetAddress;
-//import javax.mail.internet.MimeMessage;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -36,6 +30,14 @@ import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 
 
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import java.awt.Color;
 
@@ -136,6 +138,30 @@ public class VentanaRegistro extends JFrame {
 			}
 		});
 
+		
+		JButton btnHasOlvidadoLa = new JButton("\u00BFHas olviado la contrase\u00F1a?");
+		btnHasOlvidadoLa.setBackground(new Color(6, 50, 113));
+		btnHasOlvidadoLa.setForeground(Color.BLACK);
+		
+		btnHasOlvidadoLa.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String mail = JOptionPane.showInputDialog("Escribe tu mail");
+				String pass = BD.olvidarContra(textField.getText());
+
+				
+				
+				enviarCorreo(pass, mail);
+			}
+			
+			
+		});
+		panel_Mid.add(btnHasOlvidadoLa, "cell 1 3,alignx center,aligny center");
+		
+		
+		
 		JButton btnIniciarSesion = new JButton("Iniciar Sesion");
 		btnIniciarSesion.setBackground(new Color(6, 50, 113));
 		btnIniciarSesion.setForeground(Color.BLACK);
@@ -177,11 +203,14 @@ public class VentanaRegistro extends JFrame {
 						
 						VentanaCrearUsuario vr = new VentanaCrearUsuario(ventanaanterior);
 						vr.setVisible(true);
+						VentanaRegistro.this.setVisible(false);
 					}
 				}
 				
 			}
 		});
+		
+	}
 				
 				
 				
@@ -189,8 +218,87 @@ public class VentanaRegistro extends JFrame {
 				
 	
 		
+		private void enviarCorreo(String pass, String mail) {
+
+			
+			
+			// El correo gmail de envÌo
+			  String correoEnvia = "udblackjack@gmail.com";
+			  String claveCorreo = "deustoblackjack";
+			  
+			  // La configuraciÛn para enviar correo
+			  Properties properties = new Properties();
+			 
+			  properties.put("mail.smtp.host", "smtp.gmail.com");
+			  properties.put("mail.smtp.port", "587");
+
+			  properties.put("mail.smtp.starttls.enable", "true");
+			  properties.put("mail.smtp.auth", "true");
+			  properties.put("mail.user", correoEnvia);
+			  properties.put("mail.password", claveCorreo);
+			 
+			  // Obtener la sesion
+			  Session session = Session.getInstance(properties, null);
+			  int aviso = 0;
+			  try {
+			   // Crear el cuerpo del mensaje
+			   MimeMessage mimeMessage = new MimeMessage(session);
+			 
+			   // Agregar quien envÌa el correo
+			   mimeMessage.setFrom(new InternetAddress(correoEnvia, "UD BLACKJACK"));
+			    
+			   // Los destinatarios
+			   InternetAddress[] internetAddresses = {new InternetAddress(mail)};
+
+			 
+			   // Agregar los destinatarios al mensaje
+			   mimeMessage.setRecipients(Message.RecipientType.TO,
+			     internetAddresses);
+			 
+			   // Agregar el asunto al correo
+			   mimeMessage.setSubject("Recuperación de contraseña");
+			 
+			   // Creo la parte del mensaje
+			   MimeBodyPart mimeBodyPart = new MimeBodyPart();
+			   mimeBodyPart.setText("Su contraseña es: " + "\n" + "	" + pass + "\n" + "\n" + "\n"
+						+ "El Equipo de UD BLACKJACK");
+			 
+			  // MimeBodyPart mimeBodyPartAdjunto = new MimeBodyPart();
+			  // mimeBodyPartAdjunto.attachFile("C:/Users/Public/Pictures/Sample Pictures/Penguins.jpg");
+
+				// Crear el multipart para agregar la parte del mensaje anterior
+				Multipart multipart = new MimeMultipart();
+				multipart.addBodyPart(mimeBodyPart);
+				//multipart.addBodyPart(mimeBodyPartAdjunto);
+			   
+			   // Agregar el multipart al cuerpo del mensaje
+			   mimeMessage.setContent(multipart);
+			 
+			   // Enviar el mensaje
+			   Transport transport = session.getTransport("smtp");
+			   transport.connect(correoEnvia, claveCorreo);
+			   transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+			   
+			   transport.close();
+			 
+			  } catch (Exception ex) {
+			   ex.printStackTrace();
+			   JOptionPane.showMessageDialog(null, "Error: "+ex.getMessage());
+			   aviso = 1;
+			  }
+			  if (aviso==0) {
+				  JOptionPane.showMessageDialog(null, "Correo electronico enviado exitosamente");
+			  }
+			 }
 
 
-}}
+			
+			
+}
+	
+	
+	
+	
+
 
 	

@@ -429,8 +429,26 @@ public static ArrayList<String> obtenerUsuarios(){
 	}
 	return usuarios;
 }
+	
+	
+public static ArrayList<String> sacarRanking(){
+	ArrayList<String> lista = new ArrayList<String>();
+	String query = "SELECT nombre FROM usuario ORDER BY dinero DESC";
+	try {
+		ResultSet rs = stmt.executeQuery(query);
+		while(rs.next()){
+			String nombre = rs.getString(1);
+			lista.add(nombre);
+			
+		}
+		rs.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
+	return lista;
+}
 	
-		
-	
+
+	}
 	

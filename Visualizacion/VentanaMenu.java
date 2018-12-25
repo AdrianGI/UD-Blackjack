@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 import BD.BD;
 import Datos.Main;
 import Datos.Usuario;
+import Ficheros.GestionFicheros;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextPane;
 
@@ -126,7 +127,7 @@ public class VentanaMenu extends JFrame {
 				a.setVisible(true);
 			}
 		});
-		btnIngresarDinero.setBounds(89, 47, 227, 29);
+		btnIngresarDinero.setBounds(89, 35, 227, 29);
 		panel_Centro.add(btnIngresarDinero);
 		
 	
@@ -140,7 +141,7 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnHistorial.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnHistorial.setBounds(89, 129, 227, 29);
+		btnHistorial.setBounds(89, 97, 227, 29);
 		panel_Centro.add(btnHistorial);
 		
 		JButton btnRetirarDinero = new JButton("Retirar Dinero");
@@ -152,20 +153,33 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		btnRetirarDinero.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnRetirarDinero.setBounds(89, 88, 227, 29);
+		btnRetirarDinero.setBounds(89, 66, 227, 29);
 		panel_Centro.add(btnRetirarDinero);
 		
-		JButton btnInstrucciones = new JButton("Instrucciones");
+		JButton btnInstrucciones = new JButton("Top 10");
 		btnInstrucciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaInstrucciones v= new VentanaInstrucciones(VentanaMenu.this);
+				GestionFicheros.Ranking(BD.sacarRanking());
+				VentanaRanking v= new VentanaRanking(VentanaMenu.this);
 				v.setVisible(true);
 				VentanaMenu.this.setVisible(false);
 			}
 		});
 		btnInstrucciones.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		btnInstrucciones.setBounds(89, 170, 227, 29);
+		btnInstrucciones.setBounds(89, 129, 227, 29);
 		panel_Centro.add(btnInstrucciones);
+		
+		JButton button_1 = new JButton("Instrucciones");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaInstrucciones v= new VentanaInstrucciones(VentanaMenu.this);
+				v.setVisible(true);
+				VentanaMenu.this.setVisible(false);
+			}
+		});
+		button_1.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		button_1.setBounds(89, 163, 227, 29);
+		panel_Centro.add(button_1);
 		
 		JPanel panelsur = new JPanel();
 		panelsur.setBackground(Color.WHITE);

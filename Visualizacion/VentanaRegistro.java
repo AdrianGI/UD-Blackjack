@@ -263,9 +263,7 @@ public class VentanaRegistro extends JFrame {
 			   mimeBodyPart.setText("Su contraseña es: " + "\n" + "	" + pass + "\n" + "\n" + "\n"
 						+ "El Equipo de UD BLACKJACK");
 			 
-			  // MimeBodyPart mimeBodyPartAdjunto = new MimeBodyPart();
-			  // mimeBodyPartAdjunto.attachFile("C:/Users/Public/Pictures/Sample Pictures/Penguins.jpg");
-
+			  
 				// Crear el multipart para agregar la parte del mensaje anterior
 				Multipart multipart = new MimeMultipart();
 				multipart.addBodyPart(mimeBodyPart);
@@ -288,6 +286,7 @@ public class VentanaRegistro extends JFrame {
 			  }
 			  if (aviso==0) {
 				  JOptionPane.showMessageDialog(null, "Correo electronico enviado exitosamente");
+				  log.log(Level.INFO, "Correo de recuperación de contraseña enviado");
 			  }
 			 }
 

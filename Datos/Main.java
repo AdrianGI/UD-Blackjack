@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import Ficheros.GestionFicheros;
 import Visualizacion.VentanaInicioo;
 import Visualizacion.VentanaMenu;
 
@@ -30,6 +31,7 @@ public class Main {
 			m.cargaProperties();
 			VentanaMenu vp = new VentanaMenu(u);
 			vp.setVisible(true);
+			
 		} catch (IOException e) {
 			VentanaInicioo v = new VentanaInicioo();
 			v.setVisible(true);

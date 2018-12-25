@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Logger;
@@ -74,6 +75,7 @@ public static void Retirar( String nomfich, String nombre,String numCuenta,float
 	File f = new File(nomfich+".txt");
 	if(!f.exists())
 		pw = new PrintWriter(f);
+	
 	else
 		pw = new PrintWriter(new FileWriter(f,true));
 	pw.println(dia+"/"+mes+"/"+anio+"     "+ horas+":"+ minutos+":"+segundos );
@@ -93,7 +95,61 @@ public static void Retirar( String nomfich, String nombre,String numCuenta,float
 	}
 
 		
+public static void Ranking(ArrayList<String> lista) {
+
+	int i =0;
+	int con=1;
+		
+	try {
+
+	ArrayList<String> ranking= lista;
+	PrintWriter pw = null;
+	File f = new File("Ranking.txt");
 	
+	
+	if(!f.exists())
+		pw = new PrintWriter(f);
+	
+	else {
+		
+		pw = new PrintWriter(new FileWriter(f,false));
+		
+		pw.println("\n");
+	
+	while(i<=9) {
+		
+		
+		pw.println(con + "."+ "  " + "Jugador: "+ "" +ranking.get(i)+ "     "+ "Dinero: "+  BD.BD.obtenerSaldo(ranking.get(i))+ " €");
+		i++;
+		con++;
+		
+		
+	}
+	pw.flush();
+	pw.close();
+	
+	}
+	
+	} catch (FileNotFoundException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+	} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+	}
+	
+	}
+	
+	
+		
+	
+	
+
+	
+
+
+
+
 	
 
 	/*Cuando no se van a crear objetos de una clase, todos sus m�todos tienen que ser
@@ -170,6 +226,7 @@ public static void Retirar( String nomfich, String nombre,String numCuenta,float
 	*/
 	
 }
-	
+
+
 	
 	

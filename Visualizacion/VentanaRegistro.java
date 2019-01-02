@@ -147,9 +147,10 @@ public class VentanaRegistro extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				String contra = JOptionPane.showInputDialog("Escribe tu usuario");
 				String mail = JOptionPane.showInputDialog("Escribe tu mail");
-				String pass = BD.olvidarContra(textField.getText());
+				
+				String pass = BD.olvidarContra(contra);
 
 				
 				

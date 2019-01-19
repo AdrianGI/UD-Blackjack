@@ -5,7 +5,6 @@ public class Usuario {
 	private String nombre;
 	private String contrasenya;
 	private float dinero;
-	private String numCuenta;
 	
 	
 	public Usuario() {
@@ -49,22 +48,12 @@ public class Usuario {
 		this.dinero = total;
 	}
 
-	public String getNumCuenta() {
-		return numCuenta;
-	}
-
-	public void setNumCuenta(String numCuenta) {
-		
-		
-		while(numCuenta.length()==16) {
-			
-			this.numCuenta = numCuenta;
-		}
+	
 		
 	}
 	
 	
 		
 
-	}
+	
 

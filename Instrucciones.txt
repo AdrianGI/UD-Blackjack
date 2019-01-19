@@ -8,10 +8,10 @@ mano,finalmente el crupier jugara su mano dando a
 descubrir quienes el ganador de la ronda,Si te quedas
  muy lejos (entre el crupier y tu) o te has pasado de 21, 
 pierdes tu apuesta. Si se da el caso de que empatas con 
-el crupier noganas ni pierdes, recuperas tu apuesta. 
+el crupier no ganas ni pierdes, recuperas tu apuesta. 
 Las apuestas ganadorascon la jugada BlackJack se pagan
  3 x 2 (que es lo mismo que decir 1,5 x 1), el resto de 
 apuestas ganadoras,se pagaran 1 x 1.
 Solo dispondras de un turno para jugar tu mano, en el 
-cual decidirassi plantarte o pedir carta. Puedes pedir c
-arta siempre que estespor debajo de los 21 puntos.
+cual decidirassi plantarte o pedir carta. Puedes pedir 
+carta siempre que estes por debajo de los 21 puntos.

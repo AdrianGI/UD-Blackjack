@@ -27,8 +27,8 @@ class RegistroTest extends TestCase{
 		
 		String nombre1="adrian";
 		String contrasenya1="adrian";
-		String nombre2="junit";
-		String contrasenya2 ="test";
+		String nombre2="aner";
+		String contrasenya2 ="aner";
 		String nombre3="victor";
 		String contrasenya3="martin";
 		
@@ -56,7 +56,7 @@ class RegistroTest extends TestCase{
 		
 		String nombre1="adrian";
 		String contrasenya1="contra";   //contrasenya correcta adrian
-		String nombre2="junit";
+		String nombre2="prueba";
 		String contrasenya2 ="junit";	 //contrasenya correcta junit
 		String nombre3="aner";
 		String contrasenya3="lekue";	 //contrasenya correcta aner

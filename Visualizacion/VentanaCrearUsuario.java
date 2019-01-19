@@ -77,7 +77,7 @@ public class VentanaCrearUsuario extends JFrame {
 		panel_TOP.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel_TOP, BorderLayout.NORTH);
 
-		JLabel lblRegistro = new JLabel("Regristro");
+		JLabel lblRegistro = new JLabel("Registro");
 		lblRegistro.setFont(new Font("Monospaced", Font.PLAIN, 29));
 		panel_TOP.add(lblRegistro);
 
